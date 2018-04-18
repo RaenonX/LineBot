@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "LineBot", "LineBot.pyproj", "{0BB36A2F-D020-4A60-9E1B-191BCB75C539}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "LineBotSandbox", "..\LineBotSandbox\LineBotSandbox.pyproj", "{29397527-6A6F-4E19-AAAC-766C9805FE02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BB36A2F-D020-4A60-9E1B-191BCB75C539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB36A2F-D020-4A60-9E1B-191BCB75C539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29397527-6A6F-4E19-AAAC-766C9805FE02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29397527-6A6F-4E19-AAAC-766C9805FE02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DF43EE30-B2F0-40AA-AF93-8871DAA10EA2}
+	EndGlobalSection
+EndGlobal

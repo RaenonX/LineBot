@@ -1,0 +1,11 @@
+﻿{% extends "Base.html" %}
+{% block title %} {{ Title }} {% endblock %}
+{% block content -%}
+<p>
+    {% for Content in Contents -%}
+    {% filter safe|e %}
+    {{ Content }}
+    {% endfilter %}<br />
+    {%- endfor %}
+</p>
+{%- endblock %}

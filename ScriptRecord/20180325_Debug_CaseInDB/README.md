@@ -1,0 +1,1 @@
+All contents in this folder are related to the incident happened at 2018/03/25, which is caused by mistakenly making all letters in word dictionary to be uppercase letters.

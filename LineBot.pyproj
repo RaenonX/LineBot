@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0bb36a2f-d020-4a60-9e1b-191bcb75c539}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>app_local.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>Global|PythonCore|2.7</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Procfile" />
+    <Content Include="requirements.txt" />
+    <Content Include="runtime.txt" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\README.md" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Record.txt" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_final.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part1.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part1_filtered.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part1_final.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part2.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part2_filtered.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part2_final.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part3.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part3_filtered.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_fixed_v1_part3_final.csv" />
+    <Content Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\data_to_review.csv" />
+    <Content Include="static\style.css" />
+    <Content Include="SystemConfig.ini" />
+    <Content Include="templates\Base.html" />
+    <Content Include="templates\ErrorList.html" />
+    <Content Include="templates\LaTeX.html" />
+    <Content Include="templates\StickerRanking.html" />
+    <Content Include="templates\WebPage.html" />
+    <Content Include="test\event.json" />
+    <Content Include="tool\currency\ctynccy.txt.gz" />
+    <Content Include="tool\currency\pli.txt.gz" />
+    <Content Include="tool\currency\ppp19802022-18.txt.gz" />
+    <Content Include="tool\weather\cityids\097-102.txt.gz" />
+    <Content Include="tool\weather\cityids\103-108.txt.gz" />
+    <Content Include="tool\weather\cityids\109-114.txt.gz" />
+    <Content Include="tool\weather\cityids\115-122.txt.gz" />
+    <Content Include="tool\weather\owm_code.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="app_local.py" />
+    <Compile Include="app.py" />
+    <Compile Include="bot\commands.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\config.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\email\gmail.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\email\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\game_msg.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\global_handler.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\misc.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\spec_text.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\text_msg\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\text_msg\cmd_handler.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\text_msg\param.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\text_msg\param_base.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\base.py" />
+    <Compile Include="db\content_holder.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\gid_ref.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\group_manage.py" />
+    <Compile Include="db\keyword_dict.py" />
+    <Compile Include="db\keyword_dict_global.py" />
+    <Compile Include="db\member_actv.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\misc.py" />
+    <Compile Include="db\mongo_measurement.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\rss.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\score_gen.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\stk_rec.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\sys_config.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\sys_stats.py" />
+    <Compile Include="db\txt_rec.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\uid_ref.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\weather.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ext.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="game\score_gen.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="game\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScriptRecord\20180325_Debug_CaseInDB\batch_detect.py" />
+    <Compile Include="ScriptRecord\20180325_Debug_CaseInDB\Mongo_script.py" />
+    <Compile Include="ScriptRecord\20180325_Debug_CaseInDB\specific_detect.py" />
+    <Compile Include="ScriptRecord\20180415_DbAdjustment_ScoreGenChangeUID\script.py" />
+    <Compile Include="tool\currency\ctynccy.py" />
+    <Compile Include="tool\currency\exceptions.py" />
+    <Compile Include="tool\currency\exchange.py" />
+    <Compile Include="tool\currency\pli.py" />
+    <Compile Include="tool\currency\ppp.py" />
+    <Compile Include="tool\currency\__init__.py" />
+    <Compile Include="imgur\client.py" />
+    <Compile Include="imgur\helpers\error.py" />
+    <Compile Include="imgur\helpers\format.py" />
+    <Compile Include="imgur\helpers\__init__.py" />
+    <Compile Include="imgur\imgur\models\account.py" />
+    <Compile Include="imgur\imgur\models\account_settings.py" />
+    <Compile Include="imgur\imgur\models\album.py" />
+    <Compile Include="imgur\imgur\models\comment.py" />
+    <Compile Include="imgur\imgur\models\conversation.py" />
+    <Compile Include="imgur\imgur\models\custom_gallery.py" />
+    <Compile Include="imgur\imgur\models\gallery_album.py" />
+    <Compile Include="imgur\imgur\models\gallery_image.py" />
+    <Compile Include="imgur\imgur\models\image.py" />
+    <Compile Include="imgur\imgur\models\message.py" />
+    <Compile Include="imgur\imgur\models\notification.py" />
+    <Compile Include="imgur\imgur\models\tag.py" />
+    <Compile Include="imgur\imgur\models\tag_vote.py" />
+    <Compile Include="imgur\imgur\models\__init__.py" />
+    <Compile Include="imgur\imgur\__init__.py" />
+    <Compile Include="imgur\__init__.py" />
+    <Compile Include="bot\system.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\img_msg.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\text_msg\main.py" />
+    <Compile Include="bot\webpage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\__init__.py" />
+    <Compile Include="db\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="error.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bot\msg_handler\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tool\line_sticker_dl.py" />
+    <Compile Include="tool\mff.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tool\random_gen.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tool\regex.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tool\ttldict.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tool\txt_calc.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tool\txt_calc_shell.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tool\weather\aqicn_wrapper.py" />
+    <Compile Include="tool\weather\cityids\cityidregistry.py" />
+    <Compile Include="tool\weather\cityids\__init__.py" />
+    <Compile Include="tool\weather\main.py" />
+    <Compile Include="tool\weather\owm_wrapper.py" />
+    <Compile Include="tool\weather\__init__.py" />
+    <Compile Include="tool\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bot\" />
+    <Folder Include="bot\email\" />
+    <Folder Include="bot\msg_handler\text_msg\" />
+    <Folder Include="db\" />
+    <Folder Include="game\" />
+    <Folder Include="imgur\" />
+    <Folder Include="imgur\helpers\" />
+    <Folder Include="imgur\imgur\" />
+    <Folder Include="imgur\imgur\models\" />
+    <Folder Include="bot\msg_handler\" />
+    <Folder Include="ScriptRecord\" />
+    <Folder Include="ScriptRecord\20180325_Debug_CaseInDB\" />
+    <Folder Include="ScriptRecord\20180325_Debug_CaseInDB\Repair data\" />
+    <Folder Include="ScriptRecord\20180415_DbAdjustment_ScoreGenChangeUID\" />
+    <Folder Include="test\" />
+    <Folder Include="templates\" />
+    <Folder Include="static\" />
+    <Folder Include="tool\" />
+    <Folder Include="tool\currency\" />
+    <Folder Include="tool\weather\" />
+    <Folder Include="tool\weather\cityids\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|2.7" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
