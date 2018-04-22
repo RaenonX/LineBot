@@ -513,6 +513,7 @@ class group_dict_manager(db_base):
 
         if isinstance(linked_words, (str, unicode)):
             linked_words = [linked_words]
+        linked_words = list(filter(None, linked_words))
 
         filter_dict = { pair_data.KEYWORD: { '$in': target_words } }
         if not able_to_mod_pin:
@@ -554,6 +555,9 @@ class group_dict_manager(db_base):
         """is_add: True=ADD, False=DEL"""
         if not mod_disabled:
             filter_dict[pair_data.PROPERTIES + "." + pair_data.DISABLED] = False
+
+        if len(linked_words) < 1:
+            return False
 
         result = self.update_many(filter_dict, { '$pushAll' if is_add else '$pullAll': { pair_data.PROPERTIES + '.' + pair_data.LINKED_WORDS: linked_words } })
         return result.matched_count > 0 and result.matched_count == result.modified_count

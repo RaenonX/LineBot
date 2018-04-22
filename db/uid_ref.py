@@ -12,12 +12,12 @@ class user_id_ref_manager(db_base):
     NONE_REF = -1
 
     def __init__(self, mongo_client):
-        self._cache = {}
+        self._cache = { None: NONE_REF }
 
         super(user_id_ref_manager, self).__init__(mongo_client, DB_NAME, user_id_ref_manager.COLLECTION_NAME, True)
     
-    def get_ref_id_or_record(self, uid, skip_none=False):
-        """Get user reference id"""
+    def get_ref_id_or_record(self, uid):
+        """Get user reference id, get -1 if uid is None"""
         if uid not in self._cache:
             find_data = self.find_one({ user_id_ref_data.UID: uid })
             if find_data is None:
