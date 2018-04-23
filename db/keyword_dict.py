@@ -876,7 +876,8 @@ class group_dict_manager(db_base):
         data_count = len(data_list) if data_list is not None else 0
 
         if data_count > SINGLE_LIMIT:
-            return PackedResult(error.keyword_pair.too_many_matched_data(data_count, SINGLE_LIMIT))
+            err_msg = error.keyword_pair.too_many_matched_data(data_count, SINGLE_LIMIT)
+            return PackedResult(err_msg, [err_msg])
         else:
             return PackedStringResult.init_by_field(data_list, format_string, limit, append_first, no_result, '\n\n')
 
