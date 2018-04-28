@@ -30,7 +30,7 @@ class rss_manager(db_base):
         *Automatically assign public group id to affiliated group id if affiliated_group is None.
         """
         if title is None:
-            title = rss_manager.get_title_default(title)
+            title = rss_manager.get_title_default(render_text)
             
         if url is not None and not rss_manager.validate_url(url):
             return None
