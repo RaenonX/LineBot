@@ -169,6 +169,10 @@ def make_dir(dir_list):
 ##### VIRTUAL ROUTE #####
 #########################
 
+@app.route("/webhook", methods=['GET'])
+def heroku_webhook():
+    pass
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
