@@ -743,7 +743,7 @@ class packer_factory(object):
                               EN_regex=ur'JC\nQ\nGID\n(\w+)'),
           param_packer.func_Q(command_category=param_packer.func_Q.command_category.BY_KEY,
                               CH_regex=ur'小水母 找 ?(?:(ID ?)(\w+)|((?:.|\n)+))',
-                              EN_regex=ur'JC\nQ\n(?:(ID\n)(\w+)|(.+))')]
+                              EN_regex=ur'JC\nQ\n(?:(ID\n)([\w ]+)|(.+))')]
 
     _I = [param_packer.func_Q(command_category=param_packer.func_Q.command_category.BY_AVAILABLE,
                               CH_regex=ur'小水母 詳細找 ?(?:(全部)|(可以用的))',
@@ -762,8 +762,8 @@ class packer_factory(object):
                               EN_regex=ur'JC\nI\n(?:(ID\n)(\w+)|(.+))')]
 
     _X = [param_packer.func_X(command_category=param_packer.func_X.command_category.BY_ID_WORD,
-                              CH_regex=ur'小水母 複製 ?(?:(ID ?)(\w+)|((?:.|\n)+)) ?((?:包含置頂)?) ?((?:包含已刪除)?)',
-                              EN_regex=ur'JC\nX\n(?:(ID)\n(\w+)|(.+))\n?(P?)(D?)'),
+                              CH_regex=ur'小水母 複製 ?(?:(ID ?)([\w ]+)|((?:.|\n)+)) ?((?:包含置頂)?) ?((?:包含已刪除)?)',
+                              EN_regex=ur'JC\nX\n(?:(ID)\n([\w ]+)|(.+))\n?(P?)(D?)'),
           param_packer.func_X(command_category=param_packer.func_X.command_category.BY_GID,
                               CH_regex=ur'小水母 複製群組(\w+)?裡面的 ?((?:包含置頂)?) ?((?:包含置頂)?)',
                               EN_regex=ur'JC\nX\nGID\n(\w+)\n?(P?)(D?)')]
@@ -777,7 +777,7 @@ class packer_factory(object):
                               EN_regex=ur'JC\nE\n(?:(ID)\n([\w ]+)|((?:.|\n)+))\n((?:.|\n)+)\n(\w+)'),
           param_packer.func_E(command_category=param_packer.func_E.command_category.MOD_PINNED,
                               CH_regex=ur'小水母 修改(不)?置頂 ?(?:(ID ?)(\w+)|((?:.|\n)+))',
-                              EN_regex=ur'JC\nE\n(N)?P\n(?:(ID)\n(\w+)|((?:.|\n)+))')]
+                              EN_regex=ur'JC\nE\n(N)?P\n(?:(ID)\n([\w ]+)|((?:.|\n)+))')]
 
     _K = [param_packer.func_K(command_category=param_packer.func_K.command_category.RANKING,
                               CH_regex=ur'小水母 排名(\w+) ?(?:前(\w+)名)?',
