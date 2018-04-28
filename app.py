@@ -169,7 +169,7 @@ def make_dir(dir_list):
 ##### VIRTUAL ROUTE #####
 #########################
 
-@app.route("/webhook", methods=['GET'])
+@app.route("/webhook", methods=['POST'])
 def heroku_webhook():
     pass
 
