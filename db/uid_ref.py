@@ -12,7 +12,7 @@ class user_id_ref_manager(db_base):
     NONE_REF = -1
 
     def __init__(self, mongo_client):
-        self._cache = { None: NONE_REF }
+        self._cache = { None: user_id_ref_manager.NONE_REF }
 
         super(user_id_ref_manager, self).__init__(mongo_client, DB_NAME, user_id_ref_manager.COLLECTION_NAME, True)
     
