@@ -755,25 +755,37 @@ class command_handler_collection(object):
             end_index = self._packing_result.result[param_packer.func_RD.param_category.END_NUM]
             ct = self._get_count()
 
-            return tool.random_drawer.draw_number_string(start_index, end_index, ct)
+            if ct == -1:
+                return error.sys_command.func_RD_invalid_count()
+            else:
+                return tool.random_drawer.draw_number_string(start_index, end_index, ct)
 
         def _probability(self):
             prob = self._packing_result.result[param_packer.func_RD.param_category.PROBABILITY]
             ct = self._get_count()
-
-            return tool.random_drawer.draw_probability_string(prob, True, ct, 3)
+            
+            if ct == -1:
+                return error.sys_command.func_RD_invalid_count()
+            else:
+                return tool.random_drawer.draw_probability_string(prob, True, ct, 3)
 
         def _rand_text(self):
             text_arr = self._packing_result.result[param_packer.func_RD.param_category.TEXT]
             ct = self._get_count()
-
-            return tool.random_drawer.draw_text_string(text_arr, ct)
+            
+            if ct == -1:
+                return error.sys_command.func_RD_invalid_count()
+            else:
+                return tool.random_drawer.draw_text_string(text_arr, ct)
 
         def _get_count(self):
             ct = self._packing_result.result[param_packer.func_RD.param_category.COUNT]
 
             if ct is None:
                 ct = 1
+
+            if ct > error.sys_command.FUNC_RD_MAX or ct < error.sys_command.FUNC_RD_MIN:
+                return -1
 
             return ct
 

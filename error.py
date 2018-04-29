@@ -183,6 +183,9 @@ class error(object):
             return u'資料庫指令執行失敗。\n錯誤碼: {}\n錯誤訊息: {}'.format(err_instance.code, err_instance.message)
 
     class sys_command(object):
+        FUNC_RD_MAX = 9999
+        FUNC_RD_MIN = 1
+
         @staticmethod
         def unable_to_parse(result):
             if error.MODE == mode.FUNNY:
@@ -281,6 +284,10 @@ class error(object):
         @staticmethod
         def func_C_currency_symbol_unrecognizable(obj):
             return u'無法分析貨幣種類。({})'.format(obj)
+
+        @staticmethod
+        def func_RD_invalid_count():
+            return u'不合法的抽籤次數。總抽籤次數需介於{}和{}之間。'.format(error.sys_command.FUNC_RD_MIN, error.sys_command.FUNC_RD_MAX)
 
     class string_calculator(object):
         @staticmethod
