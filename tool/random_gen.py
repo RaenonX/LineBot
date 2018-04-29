@@ -49,30 +49,33 @@ class random_drawer(object):
         if is_value:
             probability /= 100.0
 
-        count = int(count)
-        result_list = {i: random_drawer.draw_probability(probability, False) for i in range(1, count + 1)}
-        shot_count = sum(x for x in result_list.values())
-        miss_count = count - shot_count
-        
-        variance = count * probability * (1 - probability)
-        sd = sqrt(variance)
-        cdf = norm.cdf((shot_count - probability*count) / sd)
+        try:
+            count = int(count)
+            result_list = {i: random_drawer.draw_probability(probability, False) for i in range(1, count + 1)}
+            shot_count = sum(x for x in result_list.values())
+            miss_count = count - shot_count
+            
+            variance = count * probability * (1 - probability)
+            sd = sqrt(variance)
+            cdf = norm.cdf((shot_count - probability*count) / sd)
 
-        text = u'機率抽選【{:.2%}、{}次】，期望值【中{:.0f}次】'.format(probability, count, round(probability * count))
-        text += u'\n方差【{}】'.format(variance)
-        text += u'\n抽選結果【中{}次 | 失{}次】'.format(shot_count, miss_count)
-        text += u'\n中選位置【{}】'.format(u'、'.join([str(key) for key, value in result_list.iteritems() if value]))
-        text += u'\n實際中率【{:.2%}】'.format(shot_count / float(len(result_list)))
+            text = u'機率抽選【{:.2%}、{}次】，期望值【中{:.0f}次】'.format(probability, count, round(probability * count))
+            text += u'\n方差【{}】'.format(variance)
+            text += u'\n抽選結果【中{}次 | 失{}次】'.format(shot_count, miss_count)
+            text += u'\n中選位置【{}】'.format(u'、'.join([str(key) for key, value in result_list.iteritems() if value]))
+            text += u'\n實際中率【{:.2%}】'.format(shot_count / float(len(result_list)))
 
-        prediction_probability = 1
-        for i in range(0, shot_count if shot_count >= prediction_count else prediction_count):
-            prediction_probability -= scipy.special.comb(count, i) * probability**i * (1 - probability)**(count - i)
-            if i < prediction_count and prediction_probability >= 0.0001:
-                text += u'\n中{}+機率【{:.2%}】'.format(i + 1, prediction_probability)
-            elif i == shot_count - 1:
-                text += u'\n中{}+機率【{:.2%}】'.format(i + 1, prediction_probability)
+            prediction_probability = 1
+            for i in range(0, shot_count if shot_count >= prediction_count else prediction_count):
+                prediction_probability -= scipy.special.comb(count, i) * probability**i * (1 - probability)**(count - i)
+                if i < prediction_count and prediction_probability >= 0.0001:
+                    text += u'\n中{}+機率【{:.2%}】'.format(i + 1, prediction_probability)
+                elif i == shot_count - 1:
+                    text += u'\n中{}+機率【{:.2%}】'.format(i + 1, prediction_probability)
 
-        return text
+            return text
+        except Exception as e:
+            return u'輸入值有誤。機率: {}、機率為值: {}、抽選次數: {}、抽中期望值預測: {} {} - {}'.format(probability, is_value, count, prediction_count, type(e), e.message)
 
     @staticmethod
     def generate_random_string(length):
