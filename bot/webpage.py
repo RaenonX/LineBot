@@ -62,11 +62,11 @@ class webpage_manager(object):
             import traceback
             print traceback.format_exc()
     
-    def rec_webpage(self, content, type, short_description=None, get_id=False):
+    def rec_webpage(self, content, webpage_type, short_description=None, get_id=False):
         """Return recorded webpage url."""
         with self._flask_app.app_context():
             try:
-                webpage_id = self._content_holder.rec_data(content, type, short_description)
+                webpage_id = self._content_holder.rec_data(content, webpage_type, short_description)
                 return webpage_id if get_id else url_for(self._route_method_name, seq_id=webpage_id)
             except Exception as e:
                 return u'(網頁無法紀錄 - {} ({}))'.format(type(e), e.message)
