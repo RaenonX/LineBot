@@ -1084,7 +1084,7 @@ class command_handler_collection(object):
                         elif ratio_ppp == 1:
                             ppp_txt = u'{}的物價跟{}一樣'
                         elif ratio_ppp < 1:
-                            ppp_txt = u'{}的物價比{}便宜{:.4f}倍'.format(src_country, tgt_country, 1/ratio_ppp)
+                            ppp_txt = u'{}的物價比{}便宜{:.4f}倍'.format(src_country, tgt_country, 1 / ratio_ppp)
 
                     ret.append(ppp_txt)
 
