@@ -1,0 +1,15 @@
+0. NEW - country entries add chinese
+1. REMAKE - System Statistics - make this to be user oriented.
+2. NEW - Query for countries information: 
+	Generic:
+		Area, Population, Timezone, Currency
+	Geographical:
+		Location, Weather (@Capital)
+	Environmental:
+		Gini Coefficient 
+	Economic:
+		GDP, Price Level Index (Local and Global)
+3. NEW - Random guessing game:
+	Provide a character and display its available options
+4. NEW - Group Kick Preventing:
+	Keep LINE ID to contact the group manager by token.

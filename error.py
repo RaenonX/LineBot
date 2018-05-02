@@ -349,5 +349,5 @@ class warning(object):
 
     class currency(object):
         @staticmethod
-        def data_not_enough():
-            return u'(資料不足，無法計算)'
+        def data_not_enough(country):
+            return u'({}的資料不足)'

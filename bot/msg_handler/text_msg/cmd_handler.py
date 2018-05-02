@@ -1073,14 +1073,22 @@ class command_handler_collection(object):
                     tgt_country = ppp_t.country_name
                     tgt_ppp = ppp_t.get_data()
 
-                    if tgt_ppp != tool.currency.data_entry.NA and src_ppp != tool.currency.data_entry.NA:
-                        amount_ppp = amount * (tgt_ppp / src_ppp)
+                    if tgt_ppp == tool.currency.data_entry.NA:
+                        ppp_txt = warning.currency.data_not_enough(tgt_country)
+                    elif src_ppp == tool.currency.data_entry.NA:
+                        ppp_txt = warning.currency.data_not_enough(src_country)
                     else:
-                        amount_ppp = warning.currency.data_not_enough()
+                        ratio_ppp = tgt_ppp / src_ppp
+                        if ratio_ppp > 0:
+                            ratio_ppp /= conv_result.rate
+                            ppp_txt = u'{}的物價比{}貴{.4f}倍'.format(src_country, tgt_country, ratio_ppp)
+                        elif ratio_ppp == 0:
+                            ppp_txt = u'{}的物價跟{}一樣'
+                        elif ratio_ppp < 0:
+                            ratio_ppp = conv_result.rate / (src_ppp / tgt_ppp)
+                            ppp_txt = u'{}的物價比{}便宜{.4f}倍'.format(src_country, tgt_country, ratio_ppp)
 
-                    ret.append(u'{} ({}) → {} ({}):\n{} → {:.5f}{}'.format(
-                        src_country, source_currency, tgt_country, target_currency, amount, amount_ppp,
-                        u' ({} {:.3f})'.format(source_currency, amount_ppp / conv_result.rate) if amount_ppp != warning.currency.data_not_enough() else u''))
+                    ret.append(ppp_txt)
 
             return u'\n'.join(ret)
 

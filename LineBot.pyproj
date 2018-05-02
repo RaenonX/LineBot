@@ -43,6 +43,7 @@
     <Content Include="templates\StickerRanking.html" />
     <Content Include="templates\WebPage.html" />
     <Content Include="test\event.json" />
+    <Content Include="TODOtxt.txt" />
     <Content Include="tool\currency\ctynccy.txt.gz" />
     <Content Include="tool\currency\pli.txt.gz" />
     <Content Include="tool\currency\ppp19802022-18.txt.gz" />
