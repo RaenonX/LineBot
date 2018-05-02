@@ -1081,7 +1081,7 @@ class command_handler_collection(object):
                         ratio_ppp = tgt_ppp / src_ppp
                         if ratio_ppp > 0:
                             ratio_ppp /= conv_result.rate
-                            ppp_txt = u'{}的物價比{}貴{.4f}倍'.format(src_country, tgt_country, ratio_ppp)
+                            ppp_txt = u'{}的物價比{}貴{:.4f}倍'.format(src_country, tgt_country, ratio_ppp)
                         elif ratio_ppp == 0:
                             ppp_txt = u'{}的物價跟{}一樣'
                         elif ratio_ppp < 0:
