@@ -1086,7 +1086,7 @@ class command_handler_collection(object):
                             ppp_txt = u'{}的物價跟{}一樣'
                         elif ratio_ppp < 0:
                             ratio_ppp = conv_result.rate / (src_ppp / tgt_ppp)
-                            ppp_txt = u'{}的物價比{}便宜{.4f}倍'.format(src_country, tgt_country, ratio_ppp)
+                            ppp_txt = u'{}的物價比{}便宜{:.4f}倍'.format(src_country, tgt_country, ratio_ppp)
 
                     ret.append(ppp_txt)
 
