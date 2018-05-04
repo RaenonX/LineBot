@@ -138,7 +138,10 @@ class sc_gen_data_manager(db_base):
             }
         ])
 
-        return sc_gen_user_data(next(aggr_cursor))
+        try:
+            return sc_gen_user_data(next(aggr_cursor))
+        except StopIteration:
+            return sc_gen_user_data({}, True)
 
     def get_analyzed_data_today(self):
         return self.get_analyzed_data(sc_gen_data_manager.get_today_past_seconds())
