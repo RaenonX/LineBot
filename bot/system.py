@@ -307,6 +307,8 @@ class line_api_wrapper(object):
             return self.profile_name(uid, src)
         except UserProfileNotFoundError:
             return u'(Unknown)'
+        except ValueError:
+            return u'(Unable to acquire UID)'
 
     def profile_group(self, gid, uid):
         try:
