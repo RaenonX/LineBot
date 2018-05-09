@@ -41,7 +41,7 @@ class weather_report_config(db_base):
         if city_ids is None:
             return error.error.main.invalid_thing_with_correct_format(u'城市ID', u'整數', city_ids)
 
-        mod_result = self.update_one({ weather_report_config_data.USER_ID: uid }, { '$pullAll': { weather_report_config_data.CONFIG: { weather_report_child_config.CITY_ID: city_ids } } }, True)
+        mod_result = self.update_one({ weather_report_config_data.USER_ID: uid }, { '$pullAll': { weather_report_config_data.CONFIG + "." + weather_report_child_config.CITY_ID: city_ids } }, True)
 
         if mod_result.modified_count > 0:
             return u'已刪除常用城市。\n城市ID: {}'.format(u'、'.join([u'#{}'.format(id) for id in city_ids]))
