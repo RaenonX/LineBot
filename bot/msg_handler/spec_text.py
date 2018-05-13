@@ -83,7 +83,7 @@ class special_text_handler(object):
         m_score = self._luck_gen_record.get_max_sc_gen_data().score
         m_score_1d = self._luck_gen_record.get_max_sc_gen_data(seconds_past_today).score
 
-        return u'運勢分數(0~10): {:.3f}\n高於此分數的機率: {:.3%}\n21日內最高分: {:.5f} ({:.3%})\n本日最高分(AM 8起算): {:.5f} ({:.3%})\n\n其他運勢使用方式請參見說明書。\n運勢專區LINE群: http://line.me/R/ti/g/lDqLRHClgh'.format(
+        return u'運勢分數(0~10): {:.3f}\n高於此分數的機率: {:.3%}\n21日內最高分: {:.5f} ({:.3%})\n本日最高分(AM 8起算): {:.5f} ({:.3%})\n\n其他運勢使用方式請參見說明書。\n運勢專區/小水母洗版區: https://line.me/R/ti/g/uI3tAfrqvE'.format(
             score, score_package.get_opportunity_greater(), 
             float(str(m_score)), game.sc_gen_data.calculate_opportunity_greater(m_score), 
             float(str(m_score_1d)), game.sc_gen_data.calculate_opportunity_greater(m_score_1d))

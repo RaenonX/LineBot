@@ -806,7 +806,7 @@ class packer_factory(object):
                                   CH_regex=ur'小水母 讓 ?(\w+) ?變成(\w+)',
                                   EN_regex=ur'JC\nGA2\n(\w+)\n(\w+)')]
 
-    _GA3 = [param_packer.func_GA2(command_category=param_packer.func_GA2.command_category.SET_PERMISSION,
+    _GA3 = [param_packer.func_GA3(command_category=param_packer.func_GA3.command_category.ACTIVATE_PUBLIC_DATA,
                                   CH_regex=ur'小水母 啟用公用資料庫(\w+)',
                                   EN_regex=ur'JC\nGA3\n(\w+)')]
 
