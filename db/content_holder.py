@@ -238,7 +238,7 @@ class rps_holder(db_base):
             return rps_message.error.game_is_not_enabled()
 
         if self._has_cache_player(cid, uid):
-            return rps_message.error.player_already_exist()
+            return rps_message.error.player_already_exist(uid)
 
         self._set_cache_player(cid, uid)
         self.find_one_and_update({ rps_online.CHAT_INSTANCE_ID: cid }, { '$set': { rps_online.PLAYERS + '.' + uid: battle_player.init_by_field(uid, uid_name) } }, None, None, False, pymongo.ReturnDocument.AFTER)
