@@ -2,7 +2,7 @@
 
 from datetime import datetime, timedelta
 
-import db, bot, tool, game
+import db, bot, tool, game, error
 
 class special_text_handler(object):
     def __init__(self, mongo_client, line_api_wrapper, weather_reporter):
@@ -75,7 +75,8 @@ class special_text_handler(object):
         score_package = game.score_gen.sc_gen.generate_score()
         score = score_package.get_score()
 
-        self._luck_gen_record.record(score, uid)
+        if uid is not None:
+            self._luck_gen_record.record(score, uid)
 
         now = datetime.now()
         seconds_past_today = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
@@ -108,9 +109,12 @@ class special_text_handler(object):
             data_all.get_status_string(), max_name_all, max_data_all.get_status_string(), min_name_all, min_data_all.get_status_string())
 
     def _handle_text_spec_luck_self(self, uid, cid):
-        data = self._luck_gen_record.get_spec_user_data(uid)
-        data_today = self._luck_gen_record.get_spec_user_data(uid, db.sc_gen_data_manager.get_today_past_seconds())
-        return u'全時統計\n{}\n\n本日統計(8 AM起算)\n{}'.format(data.get_status_string(), data_today.get_status_string())
+        if uid is not None:
+            data = self._luck_gen_record.get_spec_user_data(uid)
+            data_today = self._luck_gen_record.get_spec_user_data(uid, db.sc_gen_data_manager.get_today_past_seconds())
+            return u'全時統計\n{}\n\n本日統計(8 AM起算)\n{}'.format(data.get_status_string(), data_today.get_status_string())
+        else:
+            return u'因無法獲取LINE UID，本功能無法使用。\n{}'.format(error.error.line_bot_api.unable_to_receive_user_id())
 
     def _handle_text_spec_time(self, uid, cid):
         # Location (CH), Abbreviation, Time offset in hr
