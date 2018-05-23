@@ -902,7 +902,12 @@ class command_handler_collection(object):
         def generate_output(self):
             score = self._packing_result.result[param_packer.func_LUK.param_category.SCORE]
             
-            return u'獲得比{}分更高的機率為{:%}'.format(score, game.sc_gen_data.calculate_opportunity_greater(score))
+            result = game.sc_gen_data.calculate_opportunity_greater(score)
+            
+            if not isinstance(result, unicode):
+                return u'獲得比{}分更高的機率為{:%}'.format(score, result)
+            else:
+                return u'Error during calculation:\n{}'.format(result)
 
     class _DL(object):
         def __init__(self, packing_result, sticker_dl, webpage_gen):
