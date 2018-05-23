@@ -904,9 +904,9 @@ class command_handler_collection(object):
             
             result = game.sc_gen_data.calculate_opportunity_greater(score)
             
-            if not isinstance(result, unicode):
+            try:
                 return u'獲得比{}分更高的機率為{:%}'.format(score, result)
-            else:
+            except ValueError:
                 return u'Error during calculation:\n{}'.format(result)
 
     class _DL(object):
