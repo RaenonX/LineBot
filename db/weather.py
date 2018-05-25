@@ -25,7 +25,7 @@ class weather_report_config(db_base):
         if city_ids is None:
             return error.error.main.invalid_thing_with_correct_format(u'城市ID', u'整數', city_ids)
 
-        mod_result = self.update_one({ weather_report_config_data.USER_ID: uid }, { '$pushAll': { weather_report_config_data.CONFIG: [weather_report_child_config.init_by_field(city_id, mode, interval, data_range) for city_id in city_ids] } }, True)
+        mod_result = self.update_one({ weather_report_config_data.USER_ID: uid }, { '$push': { weather_report_config_data.CONFIG: { '$each': [weather_report_child_config.init_by_field(city_id, mode, interval, data_range) for city_id in city_ids] } } }, True)
 
         if mod_result.modified_count > 0:
             return u'已新增常用城市。\n{}'.format(u'\n'.join([u'城市ID: {} ({})\n查看{}小時內每{}小時的資料。'.format(city_id, unicode(mode), data_range, interval) for city_id in city_ids]))
