@@ -1,6 +1,6 @@
 Flask
 Flask-SQLAlchemy
-line-bot-sdk==1.5.0
+line-bot-sdk
 psycopg2
 validators
 numpy

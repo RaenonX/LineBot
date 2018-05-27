@@ -560,9 +560,9 @@ class group_dict_manager(db_base):
             return False
 
         if is_add:
-            result = self.update_many(filter_dict, { '$pullAll': { pair_data.PROPERTIES + '.' + pair_data.LINKED_WORDS: linked_words } })
-        else:
             result = self.update_many(filter_dict, { '$push': { pair_data.PROPERTIES + '.' + pair_data.LINKED_WORDS: { '$each': linked_words } } })
+        else:
+            result = self.update_many(filter_dict, { '$pullAll': { pair_data.PROPERTIES + '.' + pair_data.LINKED_WORDS: linked_words } })
         return result.matched_count > 0 and result.matched_count == result.modified_count
 
     def _search(self, filter_dict):
