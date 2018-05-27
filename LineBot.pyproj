@@ -131,6 +131,9 @@
     <Compile Include="db\weather.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Dockerfile">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ext.py">
       <SubType>Code</SubType>
     </Compile>
