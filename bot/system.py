@@ -85,6 +85,9 @@ class infinite_loop_preventer(object):
 
     def get_pw_notice_text(self, uid, line_api_wrapper):
         """Return None if pw is generated. Else, return str."""
+        if uid is None:
+            return
+
         if uid in self._last_message:
             data = self._last_message[uid]
             data.unlock_noticed = True
