@@ -437,6 +437,12 @@ class group_dict_manager(db_base):
 
         return self._search(filter_dict)
 
+    def _filter_keyword_regex(self, keyword):
+        for c in ['(', ')', '[', ']', '*']:
+            keyword = keyword.replace(c, '\\' + c)
+
+        return keyword
+
     def search_pair_by_index(self, start_id_or_id_list, end_id=None):
         """Return none if nothing found, else return result in list of pair_data class"""
         if not isinstance(start_id_or_id_list, (int, long, list)) or (not isinstance(end_id, (int, long)) and end_id is not None):
