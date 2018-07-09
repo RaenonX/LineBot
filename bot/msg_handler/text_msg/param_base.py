@@ -211,6 +211,8 @@ class param_validator(object):
         validate_unicode = param_validator.conv_unicode(obj, allow_null)
 
         if validate_unicode.valid:
+            obj = obj.split()[0]
+
             if obj.startswith('https://'):
                 return param_validation_result(obj, True)
             else:
