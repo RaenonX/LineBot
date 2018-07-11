@@ -130,7 +130,7 @@ class param_validator(object):
 
     ARRAY_SEPARATOR = "  "
 
-    IMAGE_CONTENT_TYPE = "image/jpeg"
+    IMAGE_CONTENT_TYPE = ["image/jpeg", "image/png"]
 
     @staticmethod
     def base_null(obj, allow_null):
@@ -234,7 +234,7 @@ class param_validator(object):
                 content_type = response.headers.get('content-type')
 
                 err_msg = error.sys_command.must_https_image(obj, content_type)
-                valid = content_type == param_validator.IMAGE_CONTENT_TYPE
+                valid = content_type in param_validator.IMAGE_CONTENT_TYPE
 
                 return param_validation_result(obj if valid else err_msg, valid)
             except Exception:
