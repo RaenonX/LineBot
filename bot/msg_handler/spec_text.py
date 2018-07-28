@@ -18,7 +18,8 @@ class special_text_handler(object):
             u'運勢': (self._handle_text_spec_luck, ()),
             u'運勢統計': (self._handle_text_spec_luck_rec, ()),
             u'我的運勢': (self._handle_text_spec_luck_self, ()),
-            u'時間': (self._handle_text_spec_time, ())
+            u'時間': (self._handle_text_spec_time, ()),
+            u'抽老婆': (self._handle_text_spec_rand_wife, ())
         }
 
     def handle_text(self, event):
@@ -143,3 +144,9 @@ class special_text_handler(object):
         ret.append(u'目前世界以世界標準時間為基準，依照各地區不同而偏移。基本上以經度0度算起，每往東15度，時間加一小時；往西則減一小時。部分地區會因為政府及領土和經度線重疊，為了管轄方便，而不會完全按照這個規則。')
 
         return u'\n'.join(ret)
+
+    def _handle_text_spec_rand_wife(self, uid, cid):
+        data = [(0.02, ["愛麗絲", "尤吉歐", "亞絲娜", "桐人", "LLENN"]),
+                (0.3, ["結衣", "莉法", "詩乃", "有紀", "西莉卡", "莉茲", "幸", "Pitohui", "阿爾戈", "斯朵蕾雅", "菲莉雅", "伶茵", "黑雪姬", "賽玟", "朔夜"]),
+                (0.68, ["克萊茵", "艾基爾", "希茲克利夫", "克拉蒂爾", "PoH", "牙王", "科巴茲"])]
+        return u"你的老婆是{} :D".format(tool.random_gen.random_drawer.choice_with_weight(data).encode('utf-8'))
