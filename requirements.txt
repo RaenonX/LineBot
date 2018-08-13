@@ -9,6 +9,7 @@ enum34
 sympy
 pymongo
 google-api-python-client
+oauth2client
 pyowm
 Pillow
 geopy
