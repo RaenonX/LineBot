@@ -151,3 +151,5 @@ class special_text_handler(object):
                     (0.3, ["結衣", "莉法", "詩乃", "有紀", "西莉卡", "莉茲", "幸", "Pitohui", "阿爾戈", "斯朵蕾雅", "菲莉雅", "普蕾米亞", "伶茵", "黑雪姬", "賽玟", "朔夜", "尤娜"]),
                     (0.68, ["克萊茵", "艾基爾", "希茲克利夫", "克拉蒂爾", "PoH", "牙王", "科巴茲", "瑛二", "...沒，你沒老婆", "你自己", "你的右手", "你的左手"])]
             return u"你的老婆是{} :D".format(tool.random_gen.random_drawer.choice_with_weight(data).decode('utf-8'))
+        else:
+            return u"本群組禁止使用此指令。欲使用者，請至洗版區 (https://line.me/R/ti/g/uI3tAfrqvE) 使用，謝謝。"
