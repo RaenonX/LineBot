@@ -5,6 +5,7 @@ import string
 import scipy.special
 from scipy.stats import norm
 from math import sqrt
+from numpy.random import choice
 
 from collections import Counter
 
@@ -80,3 +81,11 @@ class random_drawer(object):
     @staticmethod
     def generate_random_string(length):
         return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(length))
+
+    @staticmethod
+    def choice_with_weight(data):
+        idx = choice([i for i in range(len(data))], 
+                     1, 
+                     p=[prob for prob, items in data])[0]
+
+        return random.choice(data[idx][1])
