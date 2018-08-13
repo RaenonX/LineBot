@@ -7,7 +7,7 @@ from collections import namedtuple
 import numpy
 import pyowm
 from math import exp
-from pyowm.exceptions.not_found_error import NotFoundError
+from pyowm.exceptions.api_response_error import NotFoundError
 
 import ext
 
