@@ -76,35 +76,40 @@ class special_text_handler(object):
             return bot.line_api_wrapper.wrap_template_with_action(template_actions, template_title_alt, template_title)
 
     def _handle_text_spec_luck(self, uid, cid, search_result):
+        MAX_ONCE_COUNT = 200
+
         if search_result.lastindex >= 1:
             count = int(search_result.group(1))
 
-            result = [u'運勢{}次結果:'.format(int(search_result.group(1)))]
-            score_pkg_list = game.score_gen.sc_gen.generate_score(count)
-            score_list = []
+            if count > MAX_ONCE_COUNT:
+                result = u'運勢最多一次只能抽{}次。'.format(MAX_ONCE_COUNT)
+            else:
+                result = [u'運勢{}次結果:'.format(int(search_result.group(1)))]
+                score_pkg_list = game.score_gen.sc_gen.generate_score(count)
+                score_list = []
 
-            # Organizing data
-            for sc_pkg in score_pkg_list:
-                score_list.append(sc_pkg.get_score())
+                # Organizing data
+                for sc_pkg in score_pkg_list:
+                    score_list.append(sc_pkg.get_score())
 
-                result.append(u'{:.5f} ({:.5%})'.format(sc_pkg.get_score(), sc_pkg.get_opportunity_greater()))
+                    result.append(u'{:.5f} ({:.5%})'.format(sc_pkg.get_score(), sc_pkg.get_opportunity_greater()))
 
-            score_list_stats = tool.array_1d_statistics(score_list)
+                score_list_stats = tool.array_1d_statistics(score_list)
 
-            # Recording Data
-            if uid is not None:
-                self._luck_gen_record.record_list(score_list_stats, uid)
+                # Recording Data
+                if uid is not None:
+                    self._luck_gen_record.record_list(score_list_stats, uid)
 
-            # Generating Statistics
-            result.append(u'')
-            result.append(u'統計結果:')
-            result.append(u'{}次 | 總分 {:.5f} | 標準差 {:.5f}'.format(score_list_stats.count, score_list_stats.sum, score_list_stats.avg))
-            result.append(u'中位數 {:.5f} | 平均 {:.5f}'.format(score_list_stats.median, score_list_stats.std))
-            result.append(u'最高分 {:.5f} ({:.5%})'.format(score_list_stats.max_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.max_value)))
-            result.append(u'最低分 {:.5f} ({:.5%})'.format(score_list_stats.min_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.min_value)))
-            result.append(u'')
+                # Generating Statistics
+                result.append(u'')
+                result.append(u'統計結果:')
+                result.append(u'{}次 | 總分 {:.5f} | 標準差 {:.5f}'.format(score_list_stats.count, score_list_stats.sum, score_list_stats.avg))
+                result.append(u'中位數 {:.5f} | 平均 {:.5f}'.format(score_list_stats.median, score_list_stats.std))
+                result.append(u'最高分 {:.5f} ({:.5%})'.format(score_list_stats.max_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.max_value)))
+                result.append(u'最低分 {:.5f} ({:.5%})'.format(score_list_stats.min_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.min_value)))
+                result.append(u'')
 
-            result = u'\n'.join(result)
+                result = u'\n'.join(result)
         else:
             score_package = game.score_gen.sc_gen.generate_score()
             score = score_package.get_score()
