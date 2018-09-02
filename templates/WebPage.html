@@ -3,7 +3,7 @@
 {% block content -%}
 <p>
     {% for Content in Contents -%}
-        {% if '<a>' in Content %}
+        {% if '</a>' in Content %}
             {{ Content }}
         {% else %}
             {% filter safe|e %}
