@@ -3,13 +3,13 @@
 {% block content -%}
 <p>
     {% for Content in Contents -%}
-        {% if '</a>' in Content %}
-            {{ Content }}
-        {% else %}
-            {% filter safe|e %}
+        {%- if '</a>' in Content -%}
+            SSSSS{{ Content }}
+        {%- else -%}
+            {%- filter safe|e -%}
                 {{ Content }}
-            {% endfilter %}<br />
-        {% endif %}
+            {%- endfilter -%}<br />
+        {%- endif -%}
     {%- endfor %}
 </p>
 {%- endblock %}
