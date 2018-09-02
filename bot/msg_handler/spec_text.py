@@ -76,7 +76,7 @@ class special_text_handler(object):
             return bot.line_api_wrapper.wrap_template_with_action(template_actions, template_title_alt, template_title)
 
     def _handle_text_spec_luck(self, uid, cid, search_result):
-        if search_result.group(1):
+        if search_result.lastindex >= 1:
             count = int(search_result.group(1))
 
             result = [u'運勢{}次結果:'.format(int(search_result.group(1)))]
