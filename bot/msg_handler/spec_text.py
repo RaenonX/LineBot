@@ -17,7 +17,7 @@ class special_text_handler(object):
             u'^天氣$': (self._handle_text_spec_weather, (False,)),
             u'^詳細天氣$': (self._handle_text_spec_weather, (True,)),
             u'^運勢$': (self._handle_text_spec_luck, ()),
-            u'^運勢\d+次$': (self._handle_text_spec_luck, ()),
+            u'^運勢(\d+)次$': (self._handle_text_spec_luck, ()),
             u'^運勢統計$': (self._handle_text_spec_luck_rec, ()),
             u'^我的運勢$': (self._handle_text_spec_luck_self, ()),
             u'^時間$': (self._handle_text_spec_time, ()),
