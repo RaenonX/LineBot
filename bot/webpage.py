@@ -103,7 +103,7 @@ class webpage_manager(object):
 
     @staticmethod
     def proc_str_to_render(s):
-        return s.split('\n')
+        return [re.sub(r'((?:http|ftp|https)://(?:[\w_-]+(?:(?:\.[\w_-]+)+))(?:[\w.,@?^=%&:/~+#\!-]*[\w@?^=%&/~+#\!-]))', r'<a href="\1">\1</a>', s) for s in s.split('\n')]
 
     @staticmethod
     def html_render_error_list(boot_up, error_dict):

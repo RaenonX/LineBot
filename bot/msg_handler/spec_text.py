@@ -87,14 +87,16 @@ class special_text_handler(object):
                 result = [u'運勢{}次結果:'.format(int(search_result.group(1)))]
                 score_pkg_list = game.score_gen.sc_gen.generate_score(count)
                 score_list = []
+                score_list_txt = []
 
                 # Organizing data
                 for sc_pkg in score_pkg_list:
                     score_list.append(sc_pkg.get_score())
-
-                    result.append(u'{:.5f} ({:.5%})'.format(sc_pkg.get_score(), sc_pkg.get_opportunity_greater()))
+                    score_list_txt.append(u'{:.5f} ({:.5%})'.format(sc_pkg.get_score(), sc_pkg.get_opportunity_greater()))
 
                 score_list_stats = tool.array_1d_statistics(score_list)
+
+                result.append(self._line_api_wrapper._webpage_generator.rec_webpage(u'\n'.join(score_list_txt), db.webpage_content_type.TEXT, u'運勢結果'))
 
                 # Recording Data
                 if uid is not None:
