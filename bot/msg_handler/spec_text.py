@@ -116,7 +116,9 @@ class special_text_handler(object):
         if uid is not None:
             data = self._luck_gen_record.get_spec_user_data(uid)
             data_today = self._luck_gen_record.get_spec_user_data(uid, db.sc_gen_data_manager.get_today_past_seconds())
-            return u'全時統計\n{}\n\n本日統計(8 AM起算)\n{}'.format(data.get_status_string(), data_today.get_status_string())
+            return u'{}日內統計\n{}\n\n本日統計(8 AM起算)\n{}'.format(
+                db.score_gen.sc_gen_data_manager.DATA_EXPIRE_DAYS,
+                data.get_status_string(), data_today.get_status_string())
         else:
             return u'因無法獲取LINE UID，本功能無法使用。\n{}'.format(error.error.line_bot_api.unable_to_receive_user_id())
 
