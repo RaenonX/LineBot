@@ -15,7 +15,7 @@ DB_NAME = 'rec'
 
 class sc_gen_data_manager(db_base):
     COLLECTION_NAME = 'score_gen'
-    DATA_EXPIRE_DAYS = 21
+    DATA_EXPIRE_DAYS = 365
     DATA_EXPIRE_SECS = DATA_EXPIRE_DAYS * 24 * 60 * 60
 
     def __init__(self, mongo_client):
