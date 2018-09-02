@@ -42,7 +42,7 @@ class sc_gen_data_manager(db_base):
 
             
     def record_list(self, score_list_stats, uid):
-        new_data_collection = [sc_gen_data.init_by_field(score, self._uid_ref.get_ref_id_or_record(uid)) for score in score_list_stats.arr]
+        new_data_collection = [sc_gen_data.init_by_field(score, self._uid_ref.get_ref_id_or_record(uid)) for score in score_list_stats.array]
 
         self.insert_many(new_data_collection)
 
