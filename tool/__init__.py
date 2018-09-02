@@ -13,3 +13,5 @@ from .weather import *
 from .currency import *
 
 from .ttldict import TTLOrderedDict
+
+from .arr_1d_stats import array_1d_statistics

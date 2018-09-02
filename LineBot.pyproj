@@ -147,6 +147,9 @@
     <Compile Include="ScriptRecord\20180325_Debug_CaseInDB\Mongo_script.py" />
     <Compile Include="ScriptRecord\20180325_Debug_CaseInDB\specific_detect.py" />
     <Compile Include="ScriptRecord\20180415_DbAdjustment_ScoreGenChangeUID\script.py" />
+    <Compile Include="tool\arr_1d_stats.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tool\currency\ctynccy.py" />
     <Compile Include="tool\currency\exceptions.py" />
     <Compile Include="tool\currency\exchange.py" />

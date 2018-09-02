@@ -17,8 +17,11 @@ class sc_gen(object):
     ####################################
     
     @staticmethod
-    def generate_score():
-        return sc_gen_data()
+    def generate_score(count=None):
+        if count is None:
+            return sc_gen_data()
+        else:
+            return [sc_gen_data() for i in range(count)]
 
 class sc_gen_data(object):
     def __init__(self):
@@ -35,7 +38,7 @@ class sc_gen_data(object):
             if not x_pos.is_EmptySet:
                 self._score = float(next(iter(x_pos)))
         except Exception as e:
-            raise ValueError(u'{} | generated random number is: {}'.format(e, self._rand_x))
+            self.generate()
 
     def get_opportunity_greater(self):
         return 1 - self._rand_x

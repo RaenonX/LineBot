@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime, timedelta
+import operator
 
 import pymongo
 from bson.objectid import ObjectId
@@ -38,6 +39,18 @@ class sc_gen_data_manager(db_base):
 
         if score < self._min_data.score:
             self._min_data = new_data
+
+            
+    def record_list(self, score_list_stats, uid):
+        new_data_collection = [sc_gen_data.init_by_field(score, self._uid_ref.get_ref_id_or_record(uid)) for score in score_list_stats.arr]
+
+        self.insert_many(new_data_collection)
+
+        if score_list_stats.max_value > self._max_data.score:
+            self._max_data = new_data_collection[score_list_stats.max_index]
+
+        if score_list_stats.min_value < self._min_data.score:
+            self._min_data = new_data_collection[score_list_stats.min_index]
 
     def get_max_user_data(self, time_sec_limit=None):
         """Return None if no data"""
