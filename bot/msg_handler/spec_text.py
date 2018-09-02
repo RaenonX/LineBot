@@ -103,8 +103,8 @@ class special_text_handler(object):
                 # Generating Statistics
                 result.append(u'')
                 result.append(u'統計結果:')
-                result.append(u'{}次 | 總分 {:.5f} | 標準差 {:.5f}'.format(score_list_stats.count, score_list_stats.sum, score_list_stats.avg))
-                result.append(u'中位數 {:.5f} | 平均 {:.5f}'.format(score_list_stats.median, score_list_stats.std))
+                result.append(u'{}次 | 總分 {:.5f} | 標準差 {:.5f}'.format(score_list_stats.count, score_list_stats.sum, score_list_stats.std))
+                result.append(u'中位數 {:.5f} | 平均 {:.5f}'.format(score_list_stats.median, score_list_stats.avg))
                 result.append(u'最高分 {:.5f} ({:.5%})'.format(score_list_stats.max_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.max_value)))
                 result.append(u'最低分 {:.5f} ({:.5%})'.format(score_list_stats.min_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.min_value)))
                 result.append(u'')
