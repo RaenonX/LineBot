@@ -106,9 +106,10 @@ class special_text_handler(object):
         min_data_all = self._luck_gen_record.get_min_user_data()
         min_name_all = self._line_api_wrapper.profile_name_safe(min_data_all.user_id_ref)
 
-        return u'本日統計: {}\n\n最高分紀錄使用者 {} 之統計資料:\n{}\n\n最低分紀錄使用者 {} 之統計資料:\n{}\n\n全時統計: {}\n \
+        return u'本日統計: {}\n\n最高分紀錄使用者 {} 之統計資料:\n{}\n\n最低分紀錄使用者 {} 之統計資料:\n{}\n\n{}日內統計: {}\n \
                 \n最高分紀錄使用者 {} 之統計資料:\n{}\n\n最低分紀錄使用者 {} 之統計資料:\n{}'.format(
             data_today.get_status_string(), max_name_today, max_data_today.get_status_string(), min_name_today, min_data_today.get_status_string(),
+            db.score_gen.sc_gen_data_manager.DATA_EXPIRE_DAYS,
             data_all.get_status_string(), max_name_all, max_data_all.get_status_string(), min_name_all, min_data_all.get_status_string())
 
     def _handle_text_spec_luck_self(self, uid, cid):
