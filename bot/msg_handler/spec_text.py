@@ -104,9 +104,10 @@ class special_text_handler(object):
 
                 # Generating Statistics
                 result.append(u'')
-                result.append(u'統計結果:')
-                result.append(u'{}次 | 總分 {:.5f} | 標準差 {:.5f}'.format(score_list_stats.count, score_list_stats.sum, score_list_stats.std))
-                result.append(u'中位數 {:.5f} | 平均 {:.5f}'.format(score_list_stats.median, score_list_stats.avg))
+                result.append(u'統計結果 ({}次):'.format(score_list_stats.count))
+                result.append(u'總分 {:.5f} ({:+.5f}) | 標準差 {:.5f}'.format(score_list_stats.sum - 2.501499 * score_list_stats.count, score_list_stats.sum, score_list_stats.std))
+                result.append(u'中位數 {:.5f} ({:+.5f})'.format(score_list_stats.median, score_list_stats.median - 2.063929))
+                result.append(u'平均 {:.5f} ({:+.5f})'.format(score_list_stats.avg, score_list_stats.avg - 2.501499))
                 result.append(u'最高分 {:.5f} ({:.5%})'.format(score_list_stats.max_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.max_value)))
                 result.append(u'最低分 {:.5f} ({:.5%})'.format(score_list_stats.min_value, game.sc_gen_data.calculate_opportunity_greater(score_list_stats.min_value)))
                 result.append(u'')
