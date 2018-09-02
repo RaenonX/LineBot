@@ -4,7 +4,7 @@
 <p>
     {% for Content in Contents -%}
         {%- if '</a>' in Content -%}
-            SSSSS{{ Content }}
+            {{ Content|safe }}
         {%- else -%}
             {%- filter safe|e -%}
                 {{ Content }}
