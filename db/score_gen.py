@@ -20,6 +20,7 @@ class sc_gen_data_manager(db_base):
 
     def __init__(self, mongo_client):
         super(sc_gen_data_manager, self).__init__(mongo_client, DB_NAME, sc_gen_data_manager.COLLECTION_NAME, False)
+        self.drop_index(sc_gen_data.TIMESTAMP)
         self.create_index([(sc_gen_data.TIMESTAMP, pymongo.DESCENDING)], expireAfterSeconds=sc_gen_data_manager.DATA_EXPIRE_SECS)
 
         self._max_data = self.get_max_sc_gen_data()
