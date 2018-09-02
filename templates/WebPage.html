@@ -6,9 +6,7 @@
         {%- if '</a>' in Content -%}
             {{ Content|safe }}
         {%- else -%}
-            {%- filter safe|e -%}
-                {{ Content }}
-            {%- endfilter -%}<br />
+            {{ Content }}<br />
         {%- endif -%}
     {%- endfor %}
 </p>
