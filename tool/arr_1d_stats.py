@@ -3,6 +3,7 @@ import numpy
 class array_1d_statistics(object):
     def __init__(self, arr):
         self._arr = arr
+        self._sorted_arr = sorted(self._arr)
 
         self._min_index, self._min_value = min(enumerate(self._arr), key=lambda p: p[1])
         self._max_index, self._max_value = max(enumerate(self._arr), key=lambda p: p[1])
@@ -10,9 +11,9 @@ class array_1d_statistics(object):
         self._count = len(self._arr)
 
         if self._count % 2 == 1:
-            self._median = self._arr[self._count / 2 + 1]
+            self._median = self._sorted_arr[self._count / 2 + 1]
         else:
-            self._median = (self._arr[self._count / 2 - 1] + self._arr[self._count / 2]) / 2.0
+            self._median = (self._sorted_arr[self._count / 2 - 1] + self._sorted_arr[self._count / 2]) / 2.0
 
         self._sum = sum(self._arr)
         self._avg = self._sum / float(self._count)
