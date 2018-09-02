@@ -128,7 +128,7 @@ class error(object):
     class line_bot_api(object):
         MAX_TEMPLATE_ACTIONS = 30
         MAX_CHARACTER_COUNT = 2000 # Ref: https://developers.line.me/en/docs/messaging-api/reference/#text
-        MAX_NEWLINE = 35
+        MAX_NEWLINE = 20
 
         @staticmethod
         def unable_to_receive_user_id():
