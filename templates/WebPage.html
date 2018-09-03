@@ -4,7 +4,7 @@
 <p>
     {% for Content in Contents -%}
         {%- if '</a>' in Content -%}
-            {{ Content|safe }}
+            {{ Content|safe }}<br />
         {%- else -%}
             {{ Content }}<br />
         {%- endif -%}
