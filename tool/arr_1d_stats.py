@@ -11,9 +11,9 @@ class array_1d_statistics(object):
         self._count = len(self._arr)
 
         if self._count % 2 == 1:
-            self._median = self._sorted_arr[self._count / 2 + 1]
+            self._median = self._sorted_arr[(self._count - 1) / 2]
         else:
-            self._median = (self._sorted_arr[self._count / 2 - 1] + self._sorted_arr[self._count / 2]) / 2.0
+            self._median = (self._sorted_arr[self._count / 2 - 1a] + self._sorted_arr[self._count / 2]) / 2.0
 
         self._sum = sum(self._arr)
         self._avg = self._sum / float(self._count)
