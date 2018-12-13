@@ -274,7 +274,7 @@ class line_api_wrapper(object):
             raise ValueError(u'unknown/unhandled uid data: {} / {}'.format(uid, type(uid)))
 
     def profile(self, uid, src=None, cid=None):
-        if uid not in self._cache_profile or self._cache_profile[uid] == u'(Unknown)':
+        if uid not in self._cache_profile or self._cache_profile[uid].display_name == u'(Unknown)':
             try:
                 uid = self.acquire_uid(uid)
                 profile = self.profile_friend_list(uid)
