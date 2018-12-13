@@ -19,7 +19,7 @@ class calc_shell(object):
         result = u''
 
         try:
-            if u'result=' not in text:
+            if u'result=' not in text or u'result = ' not in text:
                 exec(u'result={}'.format(text))
             else:
                 exec(text)
