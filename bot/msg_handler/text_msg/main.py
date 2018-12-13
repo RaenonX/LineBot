@@ -488,7 +488,7 @@ class text_msg_handler(object):
         validation_pass, return_object = self._validate(packer_factory._G, text)
 
         if validation_pass:
-            G_handler = command_handler_collection._G(self._webpage_generator, self._last_chat_rec, return_object)
+            G_handler = command_handler_collection._G(self._webpage_generator, self._last_chat_rec, return_object, src)
             
             gid_result = G_handler.get_group_id(execute_in_gid)
 
