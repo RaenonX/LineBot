@@ -543,7 +543,7 @@ class command_handler_collection(object):
             return ext.action_result(gid, True)
 
         def generate_output(self, gid_result, kwd_instance, group_data):
-            group_statistics = group_data.get_status_string() + u'\n【回覆組相關】\n' + kwd_instance.get_statistics_string() + u'\n\n【最後訊息時間】\n' + self._last_chat_rec.last_chat_str(gid_result.result, src)
+            group_statistics = group_data.get_status_string() + u'\n【回覆組相關】\n' + kwd_instance.get_statistics_string() + u'\n\n【最後訊息時間】\n' + self._last_chat_rec.last_chat_str(gid_result.result, self._src)
             
             return (bot.line_api_wrapper.wrap_text_message(group_statistics, self._webpage_generator), 
                     bot.line_api_wrapper.wrap_template_with_action({ u'查詢群組資料庫': bot.text_msg_handler.CH_HEAD + u'找' + gid_result.result + u'裡面的'}, u'快速查詢群組資料庫樣板', u'相關指令'))
