@@ -280,6 +280,9 @@ class line_api_wrapper(object):
                 uid = self.acquire_uid(uid)
                 profile = self.profile_friend_list(uid)
 
+                print profile
+                print src
+
                 if profile is not None:
                     self._cache_profile[uid] = profile
                     return profile
@@ -288,6 +291,7 @@ class line_api_wrapper(object):
                     return profile
                 else:
                     source_type = line_event_source_type.determine(src)
+                    print source_type
                     if source_type == line_event_source_type.USER:
                         p = profile
                     elif source_type == line_event_source_type.GROUP:
