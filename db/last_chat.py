@@ -29,7 +29,7 @@ class last_chat_recorder(db_base):
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
 
             for uid, ts in tsd:
-                u_name = self._line_api.profile_name_safe(uid)
+                u_name = self._line_api.profile_name_safe(uid, cid=group_id)
                 ts += timedelta(hours=8)
                 time_str = ts.strftime(u'%Y-%m-%d %H:%M:%S')
                 s += u'{}: {}\n'.format(u_name, time_str)
