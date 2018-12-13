@@ -285,17 +285,19 @@ class line_api_wrapper(object):
 
                 if src is not None:
                     source_type = line_event_source_type.determine(src)
+                    sid = line_api_wrapper.source_channel_id(src)
                 elif cid is not None:
                     source_type = line_api_wrapper.determine_id_type(cid)
+                    sid = cid
                 else:
                     return profile
 
                 if source_type == line_event_source_type.USER:
                     p = profile
                 elif source_type == line_event_source_type.GROUP:
-                    p = self.profile_group(line_api_wrapper.source_channel_id(src), uid)
+                    p = self.profile_group(sid, uid)
                 elif source_type == line_event_source_type.ROOM:
-                    p = self.profile_room(line_api_wrapper.source_channel_id(src), uid)
+                    p = self.profile_room(sid, uid)
                 else:
                     raise ValueError('Instance not defined.')
 
