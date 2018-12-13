@@ -52,6 +52,10 @@ from .uid_ref import (
     user_id_ref_manager
 )
 
+from .last_chat import (
+    last_chat_recorder
+)
+
 # inactive
 # txt_rec, member_actv
 

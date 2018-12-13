@@ -102,6 +102,9 @@
     <Compile Include="db\group_manage.py" />
     <Compile Include="db\keyword_dict.py" />
     <Compile Include="db\keyword_dict_global.py" />
+    <Compile Include="db\last_chat.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="db\member_actv.py">
       <SubType>Code</SubType>
     </Compile>

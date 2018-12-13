@@ -255,6 +255,7 @@ class line_api_wrapper(object):
         self._line_api = line_api
         self._webpage_generator = webpage_generator
         self._uid_ref = db.user_id_ref_manager(mongo_client)
+        self._cache_profile = {}
 
     def acquire_uid(self, uid):
         if isinstance(uid, (str, unicode)):
@@ -273,28 +274,35 @@ class line_api_wrapper(object):
             raise ValueError(u'unknown/unhandled uid data: {} / {}'.format(uid, type(uid)))
 
     def profile(self, uid, src=None):
-        try:
-            uid = self.acquire_uid(uid)
-            profile = self.profile_friend_list(uid)
+        if uid not in self._cache_profile:
+            try:
+                uid = self.acquire_uid(uid)
+                profile = self.profile_friend_list(uid)
 
-            if profile is not None:
-                return profile
-
-            if src is None:
-                return profile
-            else:
-                source_type = line_event_source_type.determine(src)
-                if source_type == line_event_source_type.USER:
+                if profile is not None:
+                    self._cache_profile[uid] = profile
                     return profile
-                elif source_type == line_event_source_type.GROUP:
-                    return self.profile_group(line_api_wrapper.source_channel_id(src), uid)
-                elif source_type == line_event_source_type.ROOM:
-                    return self.profile_room(line_api_wrapper.source_channel_id(src), uid)
+
+                if src is None:
+                    return profile
                 else:
-                    raise ValueError('Instance not defined.')
-        except exceptions.LineBotApiError as ex:
-            if ex.status_code == 404:
-                return None
+                    source_type = line_event_source_type.determine(src)
+                    if source_type == line_event_source_type.USER:
+                        p = profile
+                    elif source_type == line_event_source_type.GROUP:
+                        p = self.profile_group(line_api_wrapper.source_channel_id(src), uid)
+                    elif source_type == line_event_source_type.ROOM:
+                        p = self.profile_room(line_api_wrapper.source_channel_id(src), uid)
+                    else:
+                        raise ValueError('Instance not defined.')
+
+                    self._cache_profile[uid] = p
+                    return p
+            except exceptions.LineBotApiError as ex:
+                if ex.status_code == 404:
+                    return None
+        else:
+            return self._cache_profile[uid]
 
     def profile_name(self, uid, src=None):
         """Raise UserProfileNotFoundError if user name is unreachable."""

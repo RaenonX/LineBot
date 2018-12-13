@@ -138,13 +138,17 @@ str_calc = tool.text_calculator(config_mgr.getint(bot.config_category.TIMEOUT, b
 # RSS Data backend initialization
 rss_data_mgr = db.rss_manager(mongo_client)
 
+# Last Message Recorder
+last_chat_rec = db.last_chat_recorder(mongo_client, line_api)
+
 # Message handler initialization
-text_handler = bot.msg_handler.text_msg_handler(app, config_mgr, line_api, mongo_client, oxford_dict_obj, sys_data, webpage_generator, imgur_api_wrapper, oxr_client, str_calc, weather_reporter, static_tmp_path, rss_data_mgr)
+text_handler = bot.msg_handler.text_msg_handler(app, config_mgr, line_api, mongo_client, oxford_dict_obj, sys_data, webpage_generator, imgur_api_wrapper, oxr_client, 
+                                                str_calc, weather_reporter, static_tmp_path, rss_data_mgr, last_chat_rec)
 spec_text_handler = bot.msg_handler.special_text_handler(mongo_client, line_api, weather_reporter)
 game_handler = bot.msg_handler.game_msg_handler(mongo_client, line_api)
 img_handler = bot.msg_handler.img_msg_handler(line_api, imgur_api_wrapper, static_tmp_path)
 
-global_handler = bot.msg_handler.global_msg_handle(line_api, sys_config, mongo_client, text_handler, spec_text_handler, game_handler, img_handler)
+global_handler = bot.msg_handler.global_msg_handle(line_api, sys_config, last_chat_rec, mongo_client, text_handler, spec_text_handler, game_handler, img_handler)
 
 # function for create tmp dir for download content
 def make_dir(dir_list):

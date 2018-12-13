@@ -16,9 +16,10 @@ import db, bot, ext, tool, error
 class global_msg_handle(object):
     SPLITTER = '\n'
 
-    def __init__(self, line_api_wrapper, system_config, mongo_client, txt_handle, special_keyword_handler, game_handle, img_handle):
+    def __init__(self, line_api_wrapper, system_config, last_msg_rec, mongo_client, txt_handle, special_keyword_handler, game_handle, img_handle):
         self._line_api_wrapper = line_api_wrapper
         self._system_config = system_config
+        self._last_msg_rec = last_msg_rec
 
         self._txt_handle = txt_handle
         self._spec_txt_handle = special_keyword_handler
@@ -263,6 +264,12 @@ class global_msg_handle(object):
     def _handle_text_str_calc(self, event):
         """Return whether message has been replied."""
         full_text = event.message.text
+
+        if full_text.endswith("="):
+            full_text = full_text[:-1]
+        else:
+            return False
+
         calc_result = self._string_calculator.calculate(full_text, self._system_config.get(db.config_data.CALCULATOR_DEBUG), event.reply_token)
         if calc_result.success:
             self._system_stats.extend_function_used(db.extend_function_category.BASIC_CALCUALTE)
@@ -339,6 +346,7 @@ class global_msg_handle(object):
         uid = bot.line_api_wrapper.source_user_id(src)
         
         self._system_data.set(bot.system_data_category.LAST_MESSAGE, cid, full_text)
+        self._last_msg_rec.update_last_chat(cid, uid)
 
         #####################################
         ### TERMINATE CHECK - LOOP TO BAN ###

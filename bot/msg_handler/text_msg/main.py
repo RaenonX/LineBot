@@ -39,9 +39,11 @@ class text_msg_handler(object):
 
     REMOTE_SPLITTER = u'\n'
 
-    def __init__(self, flask_app, config_manager, line_api_wrapper, mongo_client, oxford_api, system_data, webpage_generator, imgur_api_wrapper, oxr_client, string_calculator, weather_reporter, file_tmp_path, rss_data_mgr):
+    def __init__(self, flask_app, config_manager, line_api_wrapper, mongo_client, oxford_api, system_data, webpage_generator, imgur_api_wrapper, 
+                 oxr_client, string_calculator, weather_reporter, file_tmp_path, rss_data_mgr, last_chat_rec):
         self._flask_app = flask_app
         self._config_manager = config_manager
+        self._last_chat_rec = last_chat_rec
 
         self._array_separator = param_validator.ARRAY_SEPARATOR
 
@@ -486,7 +488,7 @@ class text_msg_handler(object):
         validation_pass, return_object = self._validate(packer_factory._G, text)
 
         if validation_pass:
-            G_handler = command_handler_collection._G(self._webpage_generator, return_object)
+            G_handler = command_handler_collection._G(self._webpage_generator, self._last_chat_rec, return_object)
             
             gid_result = G_handler.get_group_id(execute_in_gid)
 
