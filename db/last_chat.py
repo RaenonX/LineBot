@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import operator
 
 from datetime import datetime, timedelta
 
@@ -26,7 +27,7 @@ class last_chat_recorder(db_base):
             s = u'查無資料。'
         else:
             s = u''
-            tsd = last_chat_data(d).timestamps
+            tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
 
             for uid, ts in tsd.iteritems():
                 u_name = self._line_api.profile_name_safe(uid, group_id)
