@@ -273,63 +273,54 @@ class line_api_wrapper(object):
         else:
             raise ValueError(u'unknown/unhandled uid data: {} / {}'.format(uid, type(uid)))
 
-    def profile(self, uid, src=None):
-        print "(uid in self._cache_profile)"
-        print (uid in self._cache_profile)
-        print "uid"
-        print uid
-        print "src"
-        print src
-        if uid not in self._cache_profile:
+    def profile(self, uid, src=None, cid=None):
+        if uid not in self._cache_profile or self._cache_profile[uid] == u'(Unknown)':
             try:
                 uid = self.acquire_uid(uid)
                 profile = self.profile_friend_list(uid)
-                
-                print "profile"
-                print profile
-                print "src"
-                print src
 
                 if profile is not None:
                     self._cache_profile[uid] = profile
                     return profile
 
-                if src is None:
-                    return profile
-                else:
+                if src is not None:
                     source_type = line_event_source_type.determine(src)
-                    print "source_type"
-                    print source_type
-                    if source_type == line_event_source_type.USER:
-                        p = profile
-                    elif source_type == line_event_source_type.GROUP:
-                        p = self.profile_group(line_api_wrapper.source_channel_id(src), uid)
-                    elif source_type == line_event_source_type.ROOM:
-                        p = self.profile_room(line_api_wrapper.source_channel_id(src), uid)
-                    else:
-                        raise ValueError('Instance not defined.')
+                elif cid is not None:
+                    source_type = line_api_wrapper.determine_id_type(cid)
+                else:
+                    return profile
 
-                    self._cache_profile[uid] = p
-                    return p
+                if source_type == line_event_source_type.USER:
+                    p = profile
+                elif source_type == line_event_source_type.GROUP:
+                    p = self.profile_group(line_api_wrapper.source_channel_id(src), uid)
+                elif source_type == line_event_source_type.ROOM:
+                    p = self.profile_room(line_api_wrapper.source_channel_id(src), uid)
+                else:
+                    raise ValueError('Instance not defined.')
+
+                self._cache_profile[uid] = p
+                return p
+
             except exceptions.LineBotApiError as ex:
                 if ex.status_code == 404:
                     return None
         else:
             return self._cache_profile[uid]
 
-    def profile_name(self, uid, src=None):
+    def profile_name(self, uid, src=None, cid=None):
         """Raise UserProfileNotFoundError if user name is unreachable."""
         uid = self.acquire_uid(uid)
-        prof = self.profile(uid, src)
+        prof = self.profile(uid, src, cid)
         if prof is None:
             raise UserProfileNotFoundError()
         else:
             return prof.display_name
 
-    def profile_name_safe(self, uid, src=None):
+    def profile_name_safe(self, uid, src=None, cid=None):
         """Return '(Unknown)' if user name is unreachable."""
         try:
-            return self.profile_name(uid, src)
+            return self.profile_name(uid, src, cid)
         except UserProfileNotFoundError:
             return u'(Unknown)'
         except ValueError:
