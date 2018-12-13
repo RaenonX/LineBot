@@ -258,8 +258,6 @@ class line_api_wrapper(object):
         self._cache_profile = {}
 
     def acquire_uid(self, uid):
-        print uid
-        print type(uid)
         if isinstance(uid, (str, unicode)):
             if line_api_wrapper.is_valid_user_id(uid):
                 return uid
@@ -317,6 +315,7 @@ class line_api_wrapper(object):
 
     def profile_name_safe(self, uid, src=None):
         """Return '(Unknown)' if user name is unreachable."""
+        self.profile_name(uid, src)
         try:
             return self.profile_name(uid, src)
         except UserProfileNotFoundError:

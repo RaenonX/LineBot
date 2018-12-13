@@ -20,7 +20,7 @@ class last_chat_recorder(db_base):
 
         self.update_one({ last_chat_data.GROUP_ID: group_id }, { "$set": { last_chat_data.TIMESTAMP + "." + user_id: datetime.now() } }, True)
 
-    def last_chat_str(self, group_id):
+    def last_chat_str(self, group_id, src):
         d = self.find_one({ last_chat_data.GROUP_ID: group_id })
 
         if d is None:
@@ -30,9 +30,9 @@ class last_chat_recorder(db_base):
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
 
             for uid, ts in tsd:
-                u_name = self._line_api.profile_name_safe(uid, group_id)
+                u_name = self._line_api.profile_name_safe(uid, src)
                 ts += timedelta(hours=8)
-                time_str = ts.strftime(u'%Y-%m-%d %H:%M:%S.%f')
+                time_str = ts.strftime(u'%Y-%m-%d %H:%M:%S')
                 s += u'{}: {}\n'.format(u_name, time_str)
 
             s += u"\n共{}筆資料".format(len(tsd))
