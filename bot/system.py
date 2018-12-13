@@ -274,13 +274,20 @@ class line_api_wrapper(object):
             raise ValueError(u'unknown/unhandled uid data: {} / {}'.format(uid, type(uid)))
 
     def profile(self, uid, src=None):
+        print "(uid in self._cache_profile)"
         print (uid in self._cache_profile)
+        print "uid"
+        print uid
+        print "src"
+        print src
         if uid not in self._cache_profile:
             try:
                 uid = self.acquire_uid(uid)
                 profile = self.profile_friend_list(uid)
-
+                
+                print "profile"
                 print profile
+                print "src"
                 print src
 
                 if profile is not None:
@@ -291,6 +298,7 @@ class line_api_wrapper(object):
                     return profile
                 else:
                     source_type = line_event_source_type.determine(src)
+                    print "source_type"
                     print source_type
                     if source_type == line_event_source_type.USER:
                         p = profile
