@@ -258,6 +258,8 @@ class line_api_wrapper(object):
         self._cache_profile = {}
 
     def acquire_uid(self, uid):
+        print uid
+        print type(uid)
         if isinstance(uid, (str, unicode)):
             if line_api_wrapper.is_valid_user_id(uid):
                 return uid
