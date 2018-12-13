@@ -274,6 +274,7 @@ class line_api_wrapper(object):
             raise ValueError(u'unknown/unhandled uid data: {} / {}'.format(uid, type(uid)))
 
     def profile(self, uid, src=None):
+        print (uid in self._cache_profile)
         if uid not in self._cache_profile:
             try:
                 uid = self.acquire_uid(uid)
