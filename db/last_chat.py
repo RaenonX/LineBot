@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from .base import db_base, dict_like_mapping
 
@@ -30,6 +30,7 @@ class last_chat_recorder(db_base):
 
             for uid, ts in tsd.iteritems():
                 u_name = self._line_api.profile_name_safe(uid, group_id)
+                ts += timedelta(hours=8)
                 time_str = ts.strftime(u'%Y-%m-%d %H:%M:%S.%f')
                 s += u'{}: {}\n'.format(u_name, time_str)
 
