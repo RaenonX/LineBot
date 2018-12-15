@@ -179,7 +179,7 @@ def heroku_webhook():
 
 @app.route("/api/<gid>/<uid>", methods=['GET'])
 def last_chat_ts(gid, uid):
-    return last_chat_rec.get_last_chat_ts(gid, uid)
+    return last_chat_rec.get_last_chat_ts(gid, uid).strftime('%Y/%m/%d %H:%M:%S')
 
 @app.route("/callback", methods=['POST'])
 def callback():
