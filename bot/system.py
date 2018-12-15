@@ -330,7 +330,6 @@ class line_api_wrapper(object):
 
     def profile_group(self, gid, uid):
         try:
-            print self._line_api.get_group_member_profile(gid, self.acquire_uid(uid))
             return self._line_api.get_group_member_profile(gid, self.acquire_uid(uid))
         except exceptions.LineBotApiError as ex:
             if ex.status_code == 404:
