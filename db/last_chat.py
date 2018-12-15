@@ -44,7 +44,7 @@ class last_chat_recorder(db_base):
         d = self.find_one({ last_chat_data.GROUP_ID: gid })
 
         if d is not None and last_chat_data.TIMESTAMP in d and uid in d[last_chat_data.TIMESTAMP]:
-            return d[last_chat_data.TIMESTAMP][uid]
+            return d[last_chat_data.TIMESTAMP][uid] + timedelta(hours=8)
         else:
             return None
 
