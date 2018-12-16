@@ -47,7 +47,7 @@ class last_chat_recorder(db_base):
 
         if d is not None:
             for uid, ts in d[last_chat_data.TIMESTAMP].items():
-                s += "{},{}".format(uid, ts.strftime('%Y/%m/%d %H:%M:%S'))
+                s += "{},{}\n".format(uid, ts.strftime('%Y/%m/%d %H:%M:%S'))
 
         return s
 
