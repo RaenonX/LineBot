@@ -38,15 +38,18 @@ class last_chat_recorder(db_base):
 
         return s
 
-    def get_last_chat_ts(self, gid, uid):
+    def get_last_chat_ts(self, gid):
         """Return None is timestamp is not found."""
 
         d = self.find_one({ last_chat_data.GROUP_ID: gid })
 
-        if d is not None and last_chat_data.TIMESTAMP in d and uid in d[last_chat_data.TIMESTAMP]:
-            return d[last_chat_data.TIMESTAMP][uid] + timedelta(hours=8)
-        else:
-            return None
+        s = ""
+
+        if d is not None:
+            for uid, ts in d.items():
+                s += "{},{}".format(uid, ts.strftime('%Y/%m/%d %H:%M:%S'))
+
+        return s
 
 class last_chat_data(dict_like_mapping):
     GROUP_ID = 'gid'

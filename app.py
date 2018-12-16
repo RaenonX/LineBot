@@ -177,9 +177,9 @@ def make_dir(dir_list):
 def heroku_webhook():
     return "S"
 
-@app.route("/api/<gid>/<uid>", methods=['GET'])
-def last_chat_ts(gid, uid):
-    return last_chat_rec.get_last_chat_ts(gid, uid).strftime('%Y/%m/%d %H:%M:%S')
+@app.route("/api/<gid>", methods=['GET'])
+def last_chat_ts(gid):
+    return last_chat_rec.get_last_chat_ts(gid)
 
 @app.route("/callback", methods=['POST'])
 def callback():
