@@ -10,7 +10,7 @@ from multiprocessing.pool import ThreadPool
 from urlparse import urlparse
 from datetime import datetime
 
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, make_response
 
 # import custom module
 import bot
@@ -179,7 +179,15 @@ def heroku_webhook():
 
 @app.route("/api/<gid>", methods=['GET'])
 def last_chat_ts(gid):
-    return last_chat_rec.get_last_chat_ts(gid)
+    import StringIO
+    import csv
+    si = StringIO.StringIO()
+    cw = csv.writer(si)
+    cw.writerows(last_chat_rec.get_last_chat_ts_csv_list(gid))
+    output = make_response(si.getvalue())
+    output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    output.headers["Content-type"] = "text/csv"
+    return output
 
 @app.route("/callback", methods=['POST'])
 def callback():

@@ -38,18 +38,18 @@ class last_chat_recorder(db_base):
 
         return s
 
-    def get_last_chat_ts(self, gid):
+    def get_last_chat_ts_csv_list(self, gid):
         """Return None is timestamp is not found."""
 
         d = self.find_one({ last_chat_data.GROUP_ID: gid })
 
-        s = ""
+        l = []
 
         if d is not None:
             for uid, ts in d[last_chat_data.TIMESTAMP].items():
-                s += "{},{}\n".format(uid, ts.strftime('%Y/%m/%d %H:%M:%S'))
+                l.append([uid, ts.strftime('%Y/%m/%d %H:%M:%S')])
 
-        return s
+        return l
 
 class last_chat_data(dict_like_mapping):
     GROUP_ID = 'gid'
