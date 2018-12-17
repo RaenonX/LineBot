@@ -49,6 +49,8 @@ class last_chat_recorder(db_base):
             for uid, ts in d[last_chat_data.TIMESTAMP].items():
                 l.append([uid, (ts + timedelta(hours=8)).strftime('%Y/%m/%d %H:%M:%S')])
 
+            l.append(["Timestamp", (datetime.now() + timedelta(hours=8)).strftime('%Y/%m/%d %H:%M:%S')])
+
         return l
 
 class last_chat_data(dict_like_mapping):
