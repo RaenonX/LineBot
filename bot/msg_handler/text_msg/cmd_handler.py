@@ -668,7 +668,7 @@ class command_handler_collection(object):
                         action_dict['簡潔 - {}'.format(item)] = bot.text_msg_handler.CH_HEAD + u'找ID ' + item
                         action_dict['詳細 - {}'.format(item)] = bot.text_msg_handler.CH_HEAD + u'詳細找ID ' + item
                 elif action_type == bot.system_data_category.LAST_UID:
-                    action_dict = {  '使用者{}製作'.format(uid[0:9]): bot.text_msg_handler.CH_HEAD + u'找' + uid + u'做的' for uid in items_iterator }
+                    action_dict = {  '使用者{}製作'.format(uid[0:9]): bot.text_msg_handler.CH_HEAD + u'找' + uid + u'做的' for uid in items_iterator if uid is not None }
                 elif action_type == bot.system_data_category.LAST_PIC_SHA:
                     action_dict = {}
                     for sha in items_iterator:

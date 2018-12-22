@@ -464,7 +464,7 @@ class group_dict_manager(db_base):
 
     def search_pair_by_creator(self, uid):
         """Return none if nothing found, else return result in list of pair_data class"""
-        filter_dict = { pair_data.STATISTICS + '.' + pair_data.CREATOR: disabler }
+        filter_dict = { pair_data.STATISTICS + '.' + pair_data.CREATOR: uid }
         return self._search(filter_dict)
     
     def _preproc_linked_by_id(self, target_ids, linked_ids, able_to_mod_pin):
