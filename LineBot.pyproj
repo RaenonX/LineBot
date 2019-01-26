@@ -46,7 +46,7 @@
     <Content Include="TODOtxt.txt" />
     <Content Include="tool\currency\ctynccy.txt.gz" />
     <Content Include="tool\currency\pli.txt.gz" />
-    <Content Include="tool\currency\ppp19802022-18.txt.gz" />
+    <Content Include="tool\currency\ppp19802022-19.txt.gz" />
     <Content Include="tool\weather\cityids\097-102.txt.gz" />
     <Content Include="tool\weather\cityids\103-108.txt.gz" />
     <Content Include="tool\weather\cityids\109-114.txt.gz" />
