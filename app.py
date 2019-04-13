@@ -199,8 +199,9 @@ def callback():
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
-    # TODO: temp
-    temp(body)
+    # TODO: temp - join handle
+    if temp(body):
+        return 'OK'
 
     # handle webhook body
     try:
@@ -215,8 +216,53 @@ def temp(body):
     import json
     evt = json.loads(body, encoding='utf-8')
 
-    print type(evt)
-    print evt
+    #{u'destination': u'U92487b3c5d243d5d0748c11e73ed372b', 
+    #    u'events': [
+    #        {u'source': {
+    #            u'type': u'group', 
+    #            u'groupId': u'C529bddb236f4140cd868a8e695c0dc51'
+    #        }, 
+    #            u'timestamp': 1555127519233, 
+    #            u'replyToken': u'6c40ff2fce324b5f81765f4c5ab2e4da', 
+    #            u'type': u'memberJoined', 
+    #            u'joined': {
+    #                u'members': [
+    #                    {u'type': u'user', u'userId': u'U98df8611ba8dcf2f6416f7721aca7ca3'}
+    #                ]
+    #           }
+    #        }
+    #   ]
+    #}
+
+    try:
+        event = evt["events"][0]
+        event_type = event["type"]
+        reply_token = event["replyToken"]
+        source_body = event["source"]
+
+        if source_body["type"] == "group":
+            cid = source_body["groupId"]
+        elif source_body["type"] == "room":
+            cid = source_body["roomId"]
+        else:
+            raise ValueError('Unhandled event source type: {}'.format(source_body["type"]))
+
+        if event_type == "memberJoined":
+            joined_members = event["joined"]
+            for i in range(len(joined_members)):
+                joined_members[i] = line_api.profile_name_safe(joined_members["userId"], cid=cid)
+
+            line_api.reply_message_text(reply_token, u'歡迎 {} 加入群組！'.format(joined_members.join(u'、')))
+        elif event_type == "memberLeft":
+            left_members = event["left"]
+            for i in range(len(joined_members)):
+                left_members[i] = line_api.profile_name_safe(left_members["userId"], cid=cid)
+
+            line_api.reply_message_text(reply_token, u'很不幸的，{} 已離開群組。'.format(left_members.join(u'、')))
+        return True
+    except Exception as ex:
+        print ex
+        return False
 
 @app.route("/error", methods=['GET'])
 def get_error_list():
