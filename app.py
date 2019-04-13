@@ -219,24 +219,6 @@ def temp(body):
     import json
     evt = json.loads(body, encoding='utf-8')
 
-    #{u'destination': u'U92487b3c5d243d5d0748c11e73ed372b', 
-    #    u'events': [
-    #        {u'source': {
-    #            u'type': u'group', 
-    #            u'groupId': u'C529bddb236f4140cd868a8e695c0dc51'
-    #        }, 
-    #            u'timestamp': 1555127519233, 
-    #            u'replyToken': u'6c40ff2fce324b5f81765f4c5ab2e4da', 
-    #            u'type': u'memberJoined', 
-    #            u'joined': {
-    #                u'members': [
-    #                    {u'type': u'user', u'userId': u'U98df8611ba8dcf2f6416f7721aca7ca3'}
-    #                ]
-    #           }
-    #        }
-    #   ]
-    #}
-
     try:
         event = evt["events"][0]
         event_type = event["type"]
@@ -265,6 +247,7 @@ def temp(body):
             left_members = event["left"]["members"]
             for i in range(len(left_members)):
                 uid = left_members[i]["userId"]
+                last_chat_rec.delete_entry(cid, uid)
                 left_members[i] = u'{} ({})'.format(line_api.profile_name_safe(uid, cid=cid), uid)
 
             txt = u'很不幸的，{} 已離開群組。'.format(u'、'.join(left_members))
