@@ -202,9 +202,9 @@ def callback():
     # TODO: temp
 
 
-    print str(request).encode('utf-8')
-    print type(request)
-    print request.__dict__
+    print str(request.get_data()).encode('utf-8')
+    print type(request.get_data())
+    print request.get_data()
     print body.encode('utf-8')
 
     # handle webhook body
