@@ -261,7 +261,7 @@ def temp(body):
             line_api.reply_message_text(reply_token, u'很不幸的，{} 已離開群組。'.format(left_members.join(u'、')))
         return True
     except Exception as ex:
-        print ex
+        print traceback.format_exc()
         return False
 
 @app.route("/error", methods=['GET'])
