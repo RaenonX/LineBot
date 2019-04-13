@@ -202,7 +202,6 @@ def callback():
     # TODO: temp
 
 
-    print str(request.get_data()).encode('utf-8')
     print type(request.get_data())
     print request.get_data()
     print body.encode('utf-8')
