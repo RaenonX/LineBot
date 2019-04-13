@@ -200,11 +200,7 @@ def callback():
     app.logger.info("Request body: " + body)
 
     # TODO: temp
-
-
-    print type(request.get_data())
-    print request.get_data()
-    print body.encode('utf-8')
+    temp(body)
 
     # handle webhook body
     try:
@@ -214,6 +210,13 @@ def callback():
         abort(400)
 
     return 'OK'
+
+def temp(body):
+    import json
+    evt = json.loads(body, encoding='utf-8')
+
+    print type(evt)
+    print evt
 
 @app.route("/error", methods=['GET'])
 def get_error_list():
