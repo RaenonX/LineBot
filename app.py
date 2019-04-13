@@ -256,15 +256,15 @@ def temp(body):
         if event_type == "memberJoined":
             joined_members = event["joined"]["members"]
             for i in range(len(joined_members)):
-                joined_members[i] = line_api.profile_name_safe(joined_members["userId"], cid=cid)
+                joined_members[i] = line_api.profile_name_safe(joined_members[i]["userId"], cid=cid)
 
-            line_api.reply_message_text(reply_token, u'歡迎 {} 加入群組！'.format(joined_members.join(u'、')))
+            line_api.reply_message_text(reply_token, u'歡迎 {} 加入群組！'.format(u'、'.join(joined_members)))
         elif event_type == "memberLeft":
             left_members = event["left"]["members"]
             for i in range(len(left_members)):
                 left_members[i] = line_api.profile_name_safe(left_members[i]["userId"], cid=cid)
 
-            txt = u'很不幸的，{} 已離開群組。'.format(left_members.join(u'、'))
+            txt = u'很不幸的，{} 已離開群組。'.format(u'、'.join(left_members))
 
             if reply_token is None:
                 q[cid] = txt
