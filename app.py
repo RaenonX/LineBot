@@ -261,8 +261,8 @@ def temp(body):
             line_api.reply_message_text(reply_token, u'歡迎 {} 加入群組！'.format(joined_members.join(u'、')))
         elif event_type == "memberLeft":
             left_members = event["left"]["members"]
-            for i in range(len(joined_members)):
-                left_members[i] = line_api.profile_name_safe(left_members["userId"], cid=cid)
+            for i in range(len(left_members)):
+                left_members[i] = line_api.profile_name_safe(left_members[i]["userId"], cid=cid)
 
             txt = u'很不幸的，{} 已離開群組。'.format(left_members.join(u'、'))
 
