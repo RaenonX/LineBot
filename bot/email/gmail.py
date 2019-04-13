@@ -39,7 +39,7 @@ class gmail_api(object):
             print 'Define GMAIL_CLIENT_JSON in environment variable.'
             sys.exit(1)
         else:
-            with open(gmail_api.CLIENT_SECRET_FILE,'w') as f:
+            with open(gmail_api.CLIENT_SECRET_FILE, 'w') as f:
                 f.write(_client_json_content)
 
         _credential_json_content = os.getenv('GMAIL_CREDENTIAL_JSON', None)
@@ -47,7 +47,7 @@ class gmail_api(object):
             print 'Define GMAIL_CLIENT_JSON in environment variable.'
             sys.exit(1)
         else:
-            with open(gmail_api.CREDENTIAL_FILE,'w') as f:
+            with open(gmail_api.CREDENTIAL_FILE, 'w') as f:
                 f.write(_credential_json_content)
 
         self._default_subject_prefix = default_subject_prefix

@@ -40,6 +40,7 @@ from linebot.models import (
     ImageMessage, VideoMessage, AudioMessage, FileMessage, 
     UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent
 )
+
 from linebot.exceptions import LineBotApiError
 
 # import imgur API
@@ -228,6 +229,10 @@ def get_feed(group_id=None, rss_id=None):
 #######################################
 ##### LINE BOT API EVENT HANDLING #####
 #######################################
+
+@handler.add(Event)
+def handle(event):
+    print event
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
