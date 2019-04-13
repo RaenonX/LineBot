@@ -198,6 +198,13 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
+
+    # TODO: temp
+
+
+    print str(request).encode('utf-8')
+    print type(request)
+    print request.__dict__
     print body.encode('utf-8')
 
     # handle webhook body
