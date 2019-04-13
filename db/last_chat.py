@@ -56,7 +56,7 @@ class last_chat_recorder(db_base):
     def delete_entry(self, gid, uid):
         d = self.find_one({ last_chat_data.GROUP_ID: gid })
 
-        self.update_one({ last_chat_data.GROUP_ID: gid }, { "$unset": { last_chat_data.TIMESTAMP + "." + uid: "" } })
+        self.update_one({ last_chat_data.GROUP_ID: gid }, { "$unset": { last_chat_data.TIMESTAMP + "." + uid: None } })
 
 class last_chat_data(dict_like_mapping):
     GROUP_ID = 'gid'
