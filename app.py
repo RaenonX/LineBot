@@ -252,6 +252,7 @@ def temp(body):
 
         if cid in q and reply_token is not None:
             line_api.reply_message_text(reply_token, q[cid])
+            del q[cid]
 
         if event_type == "memberJoined":
             joined_members = event["joined"]["members"]
