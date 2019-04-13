@@ -259,6 +259,9 @@ def temp(body):
                 left_members[i] = line_api.profile_name_safe(left_members["userId"], cid=cid)
 
             line_api.reply_message_text(reply_token, u'很不幸的，{} 已離開群組。'.format(left_members.join(u'、')))
+        else:
+            return False
+        
         return True
     except Exception as ex:
         print traceback.format_exc()
