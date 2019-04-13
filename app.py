@@ -38,7 +38,7 @@ from linebot.models import (
     CarouselTemplate, CarouselColumn, PostbackEvent,
     StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
     ImageMessage, VideoMessage, AudioMessage, FileMessage, 
-    UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent
+    UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent, Event
 )
 
 from linebot.exceptions import LineBotApiError
