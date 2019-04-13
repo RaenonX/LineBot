@@ -264,6 +264,7 @@ def temp(body):
         
         return True
     except Exception as ex:
+        print event
         print traceback.format_exc()
         return False
 
