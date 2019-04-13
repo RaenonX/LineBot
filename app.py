@@ -190,6 +190,9 @@ def last_chat_ts(gid):
     output.headers["Content-type"] = "text/csv"
     return output
 
+### TODO: temp queue
+q = {}
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -199,7 +202,7 @@ def callback():
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
 
-    # TODO: temp - join handle
+    ### TODO: temp - join handle
     if temp(body):
         return 'OK'
 
@@ -237,7 +240,7 @@ def temp(body):
     try:
         event = evt["events"][0]
         event_type = event["type"]
-        reply_token = event["replyToken"]
+        reply_token = event.get("replyToken", None)
         source_body = event["source"]
 
         if source_body["type"] == "group":
@@ -245,20 +248,28 @@ def temp(body):
         elif source_body["type"] == "room":
             cid = source_body["roomId"]
         else:
-            raise ValueError('Unhandled event source type: {}'.format(source_body["type"]))
+            return False
+
+        if cid in q and reply_token is not None:
+            line_api.reply_message_text(reply_token, q[cid])
 
         if event_type == "memberJoined":
-            joined_members = event["joined"]
+            joined_members = event["joined"]["members"]
             for i in range(len(joined_members)):
                 joined_members[i] = line_api.profile_name_safe(joined_members["userId"], cid=cid)
 
             line_api.reply_message_text(reply_token, u'歡迎 {} 加入群組！'.format(joined_members.join(u'、')))
         elif event_type == "memberLeft":
-            left_members = event["left"]
+            left_members = event["left"]["members"]
             for i in range(len(joined_members)):
                 left_members[i] = line_api.profile_name_safe(left_members["userId"], cid=cid)
 
-            line_api.reply_message_text(reply_token, u'很不幸的，{} 已離開群組。'.format(left_members.join(u'、')))
+            txt = u'很不幸的，{} 已離開群組。'.format(left_members.join(u'、'))
+
+            if reply_token is None:
+                q[cid] = txt
+            else:
+                line_api.reply_message_text(reply_token, txt)
         else:
             return False
         
