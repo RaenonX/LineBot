@@ -32,7 +32,7 @@ class last_chat_recorder(db_base):
                 u_name = self._line_api.profile_name_safe(uid, cid=group_id)
                 ts += timedelta(hours=8)
                 time_str = ts.strftime(u'%Y-%m-%d %H:%M:%S')
-                s += u'{}: {}\n'.format(u_name, time_str)
+                s += u'{} ({}): {}\n'.format(u_name, uid, time_str)
 
             s += u"\n共{}筆資料".format(len(tsd))
 
