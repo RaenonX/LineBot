@@ -44,7 +44,7 @@ class gmail_api(object):
 
         _credential_json_content = os.getenv('GMAIL_CREDENTIAL_JSON', None)
         if _client_json_content is None:
-            print 'Define GMAIL_CLIENT_JSON in environment variable.'
+            print 'Define GMAIL_CREDENTIAL_JSON in environment variable.'
             sys.exit(1)
         else:
             with open(gmail_api.CREDENTIAL_FILE, 'w') as f:

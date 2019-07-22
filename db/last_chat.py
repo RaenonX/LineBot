@@ -7,17 +7,19 @@ from .base import db_base, dict_like_mapping
 
 class last_chat_recorder(db_base):
     DB_NAME = "group"
-    COL_NAME = "last_chat"
+    COL_NAME = "chat_count"
 
     def __init__(self, mongo_client, line_api_client):
         super(last_chat_recorder, self).__init__(mongo_client, last_chat_recorder.DB_NAME, last_chat_recorder.COL_NAME, False, [last_chat_data.GROUP_ID])
+
         self._line_api = line_api_client
 
     def update_last_chat(self, group_id, user_id):
         if user_id is None:
             return
 
-        self.update_one({ last_chat_data.GROUP_ID: group_id }, { "$set": { last_chat_data.TIMESTAMP + "." + user_id: datetime.now() } }, True)
+        self.create_index("{}.{}".format(last_chat_data.TIMESTAMP, user_id), unique=True, expireAfterSeconds=86400*3)
+        self.update_one({ last_chat_data.GROUP_ID: group_id }, { "$push": { last_chat_data.TIMESTAMP + "." + user_id: datetime.now() } }, True)
 
     def last_chat_str(self, group_id):
         d = self.find_one({ last_chat_data.GROUP_ID: group_id })
@@ -25,14 +27,15 @@ class last_chat_recorder(db_base):
         if d is None:
             s = u'查無資料。'
         else:
+            for uid, tss in d[last_chat_data.TIMESTAMP].iteritems():
+                d[last_chat_data.TIMESTAMP][uid] = len(tss)
+
             s = u''
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
 
-            for uid, ts in tsd:
+            for uid, ct in tsd:
                 u_name = self._line_api.profile_name_safe(uid, cid=group_id)
-                ts += timedelta(hours=8)
-                time_str = ts.strftime(u'%Y-%m-%d %H:%M:%S')
-                s += u'{} ({}): {}\n'.format(u_name, uid, time_str)
+                s += u'{} ({}): {}\n'.format(u_name, uid, ct)
 
             s += u"\n共{}筆資料".format(len(tsd))
 
