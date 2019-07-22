@@ -49,7 +49,7 @@ class last_chat_recorder(db_base):
 
         if d is not None:
             for uid, tss in d[last_chat_data.TIMESTAMP].items():
-                l.append([uid, len(filter(lambda t: t + timedelta(days=3) > datetime.now(), tss))])
+                l.append([uid, len(filter(lambda t: t + timedelta(days=7) > datetime.now(), tss))])
 
             l.append(["Timestamp", (datetime.now() + timedelta(hours=8)).strftime('%Y/%m/%d %H:%M:%S')])
 
