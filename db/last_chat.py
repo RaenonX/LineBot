@@ -18,7 +18,6 @@ class last_chat_recorder(db_base):
         if user_id is None:
             return
 
-        self.create_index("{}.{}".format(last_chat_data.TIMESTAMP, user_id), unique=True, expireAfterSeconds=86400*3)
         self.update_one({ last_chat_data.GROUP_ID: group_id }, { "$push": { last_chat_data.TIMESTAMP + "." + user_id: datetime.now() } }, True)
 
     def last_chat_str(self, group_id):
@@ -28,7 +27,7 @@ class last_chat_recorder(db_base):
             s = u'查無資料。'
         else:
             for uid, tss in d[last_chat_data.TIMESTAMP].iteritems():
-                d[last_chat_data.TIMESTAMP][uid] = len(tss)
+                d[last_chat_data.TIMESTAMP][uid] = len(filter(lambda t: t + timedelta(days=3) > datetime.now(), tss))
 
             s = u''
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
@@ -42,7 +41,7 @@ class last_chat_recorder(db_base):
         return s
 
     def get_last_chat_ts_csv_list(self, gid):
-        """Return None is timestamp is not found."""
+        """Return None if timestamp is not found."""
 
         d = self.find_one({ last_chat_data.GROUP_ID: gid })
 
