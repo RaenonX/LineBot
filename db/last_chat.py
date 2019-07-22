@@ -27,7 +27,7 @@ class last_chat_recorder(db_base):
             s = u'查無資料。'
         else:
             for uid, tss in d[last_chat_data.TIMESTAMP].iteritems():
-                d[last_chat_data.TIMESTAMP][uid] = len(filter(lambda t: t + timedelta(days=3) > datetime.now(), tss))
+                d[last_chat_data.TIMESTAMP][uid] = )
 
             s = u''
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
@@ -48,8 +48,8 @@ class last_chat_recorder(db_base):
         l = []
 
         if d is not None:
-            for uid, ts in d[last_chat_data.TIMESTAMP].items():
-                l.append([uid, (ts + timedelta(hours=8)).strftime('%Y/%m/%d %H:%M:%S')])
+            for uid, tss in d[last_chat_data.TIMESTAMP].items():
+                l.append([uid, len(filter(lambda t: t + timedelta(days=3) > datetime.now(), tss))])
 
             l.append(["Timestamp", (datetime.now() + timedelta(hours=8)).strftime('%Y/%m/%d %H:%M:%S')])
 
