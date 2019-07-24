@@ -19,7 +19,7 @@ class last_chat_recorder(db_base):
             return
 
         self.update_one({ last_chat_data.GROUP_ID: group_id }, { "$push": { last_chat_data.TIMESTAMP + "." + user_id: datetime.now() } ,
-                                                                 "$pull": { "$lt": { datetime.now() - timedelta(days=7) } }}, True)
+                                                                 "$pull": { "$lt": datetime.now() - timedelta(days=7) }}, True)
 
     def last_chat_str(self, group_id):
         d = self.find_one({ last_chat_data.GROUP_ID: group_id })
