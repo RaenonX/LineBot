@@ -28,7 +28,7 @@ class last_chat_recorder(db_base):
             s = u'查無資料。'
         else:
             for uid, tss in d[last_chat_data.TIMESTAMP].iteritems():
-                d[last_chat_data.TIMESTAMP][uid] = )
+                d[last_chat_data.TIMESTAMP][uid] = len(filter(lambda t: t + timedelta(days=7) > datetime.now(), tss))
 
             s = u''
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
