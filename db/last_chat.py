@@ -18,7 +18,8 @@ class last_chat_recorder(db_base):
         if user_id is None:
             return
 
-        self.update_one({ last_chat_data.GROUP_ID: group_id }, { "$push": { last_chat_data.TIMESTAMP + "." + user_id: datetime.now() } }, True)
+        self.update_one({ last_chat_data.GROUP_ID: group_id }, { "$push": { last_chat_data.TIMESTAMP + "." + user_id: datetime.now() } ,
+                                                                 "$pull": { "$lt": { datetime.now() - timedelta(days=7) } }}, True)
 
     def last_chat_str(self, group_id):
         d = self.find_one({ last_chat_data.GROUP_ID: group_id })
@@ -32,9 +33,10 @@ class last_chat_recorder(db_base):
             s = u''
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
 
-            for uid, ct in tsd:
+            for idx, tse in enumerate(tsd, start=1):
+                uid, ct = tse
                 u_name = self._line_api.profile_name_safe(uid, cid=group_id)
-                s += u'{} ({}): {}\n'.format(u_name, uid, ct)
+                s += u'#{:4d} {:30} ({}): {}\n'.format(idx, u_name, uid, ct)
 
             s += u"\n共{}筆資料".format(len(tsd))
 
