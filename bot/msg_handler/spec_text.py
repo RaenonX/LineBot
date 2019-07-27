@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime, timedelta
+import os
 import re
 
 import db, bot, tool, game, error
@@ -12,6 +13,7 @@ class special_text_handler(object):
         self._weather_config = db.weather_report_config(mongo_client)
         self._system_stats = db.system_statistics(mongo_client)
         self._luck_gen_record = db.sc_gen_data_manager(mongo_client)
+        self._word_dict_global = db.word_dict_global(mongo_client)
 
         self._special_keyword = {
             u'^天氣$': (self._handle_text_spec_weather, (False,)),
@@ -21,7 +23,8 @@ class special_text_handler(object):
             u'^運勢統計$': (self._handle_text_spec_luck_rec, ()),
             u'^我的運勢$': (self._handle_text_spec_luck_self, ()),
             u'^時間$': (self._handle_text_spec_time, ()),
-            u'^抽老婆$': (self._handle_text_spec_rand_wife, ())
+            u'^抽老婆$': (self._handle_text_spec_rand_wife, ()),
+            u'^全刪除ALLCLEAR$': (self._temp_clr_all, ())
         }
 
     def handle_text(self, event):
@@ -47,6 +50,10 @@ class special_text_handler(object):
                 return True
 
         return False
+
+    def _temp_clr_all(self, uid, cid, search_result):
+        if uid == os.environ.get("ADMIN_UID"):
+            self._word_dict_global.clear(cid, uid)
 
     def _handle_text_spec_weather(self, detailed, uid, cid, search_result):
         self._system_stats.extend_function_used(db.extend_function_category.REQUEST_WEATHER_REPORT)
