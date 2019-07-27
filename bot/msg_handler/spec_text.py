@@ -54,6 +54,7 @@ class special_text_handler(object):
     def _temp_clr_all(self, uid, cid, search_result):
         if uid == os.environ.get("ADMIN_UID"):
             self._word_dict_global.clear(cid, uid)
+            return u'完全刪除完畢。'
 
     def _handle_text_spec_weather(self, detailed, uid, cid, search_result):
         self._system_stats.extend_function_used(db.extend_function_category.REQUEST_WEATHER_REPORT)
