@@ -34,7 +34,7 @@ class last_chat_recorder(db_base):
                 d[last_chat_data.TIMESTAMP][uid] = len_
                 sl += len_
 
-            s = u'總訊息量: {}'.format(sl)
+            s = u'總訊息量: {}\n\n'.format(sl)
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
 
             for idx, tse in enumerate(tsd, start=1):
