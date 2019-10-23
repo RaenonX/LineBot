@@ -27,10 +27,14 @@ class last_chat_recorder(db_base):
         if d is None:
             s = u'查無資料。'
         else:
-            for uid, tss in d[last_chat_data.TIMESTAMP].iteritems():
-                d[last_chat_data.TIMESTAMP][uid] = len(filter(lambda t: t + timedelta(days=7) > datetime.now(), tss))
+            sl = 0
 
-            s = u''
+            for uid, tss in d[last_chat_data.TIMESTAMP].iteritems():
+                len_ = len(filter(lambda t: t + timedelta(days=7) > datetime.now(), tss))
+                d[last_chat_data.TIMESTAMP][uid] = len_
+                sl += len_
+
+            s = u'總訊息量: {}'.format(sl)
             tsd = sorted(last_chat_data(d).timestamps.items(), key=operator.itemgetter(1), reverse=True)
 
             for idx, tse in enumerate(tsd, start=1):
