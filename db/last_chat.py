@@ -40,7 +40,7 @@ class last_chat_recorder(db_base):
             for idx, tse in enumerate(tsd, start=1):
                 uid, ct = tse
                 u_name = self._line_api.profile_name_safe(uid, cid=group_id)
-                s += u'#{:>4d} {:>30} ({}): {} ({:.2f})\n'.format(idx, u_name, uid, ct, ct / sl)
+                s += u'#{:>4d} {:>30} ({}): {} ({:.2%})\n'.format(idx, u_name, uid, ct, ct / float(sl))
 
             s += u"\n共{}筆資料".format(len(tsd))
 
