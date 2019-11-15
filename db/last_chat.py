@@ -30,7 +30,7 @@ class last_chat_recorder(db_base):
             sl = 0
 
             for uid, tss in d[last_chat_data.TIMESTAMP].iteritems():
-                len_ = len(filter(lambda t: t + timedelta(days=7) > datetime.now(), tss))
+                len_ = len(filter(lambda t: t + timedelta(days=14) > datetime.now(), tss))
                 d[last_chat_data.TIMESTAMP][uid] = len_
                 sl += len_
 
@@ -40,7 +40,7 @@ class last_chat_recorder(db_base):
             for idx, tse in enumerate(tsd, start=1):
                 uid, ct = tse
                 u_name = self._line_api.profile_name_safe(uid, cid=group_id)
-                s += u'#{:>4d} {:>30} ({}): {} ({:.02%})\n'.format(idx, u_name, uid, ct, ct / sl)
+                s += u'#{:>4d} {:>30} ({}): {} ({:.2f})\n'.format(idx, u_name, uid, ct, ct / sl)
 
             s += u"\n共{}筆資料".format(len(tsd))
 
